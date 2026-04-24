@@ -162,6 +162,12 @@
             transform: translateY(0);
         }
 
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         #status { 
             text-align: center; 
             margin-top: 20px; 
@@ -170,8 +176,22 @@
             border-radius: 10px; 
             display: none; 
         }
+
+        .status-success {
+            background: #d1fae5 !important;
+            color: #065f46 !important;
+        }
+
+        .status-error {
+            background: #fee2e2 !important;
+            color: #991b1b !important;
+        }
+
+        .status-loading {
+            background: #e8f0fe !important;
+            color: #1a73e8 !important;
+        }
         
-        /* ЛОВУШКИ ДЛЯ СПИСЫВАНИЯ */
         .copy-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
         .ocr-trap { color: #fdfdfd; font-size: 4px; line-height: 1; user-select: none; margin: -5px 0; display: block; height: 1px; }
     </style>
@@ -254,13 +274,13 @@
         let originalText = document.getElementById(id).value.trim() || "[пусто]";
         
         if (studentAns === correctAns) {
-            return { isCorrect: true, text: `✅ ${originalText}` };
+            return { isCorrect: true, text: "✅ " + originalText };
         } else {
-            return { isCorrect: false, text: `❌ ${originalText} (Правильно: ${correctAns})` };
+            return { isCorrect: false, text: "❌ " + originalText + " (Правильно: " + correctAns + ")" };
         }
     }
 
-    function submitTest() {
+    async function submitTest() {
         const name = document.getElementById('studentName').value.trim();
         const btn = document.getElementById('btn');
         const status = document.getElementById('status');
@@ -274,12 +294,11 @@
         btn.disabled = true;
         btn.innerText = "Отправка...";
         status.style.display = "block";
-        status.style.background = "#e8f0fe";
-        status.style.color = "#1a73e8";
-        status.innerText = "Подготовка данных...";
+        status.className = "status-loading";
+        status.innerText = "⏳ Отправка результатов...";
 
         let score = 0;
-        let maxScore = 16; 
+        const maxScore = 16; 
 
         let res2_1 = gradeAnswer('q2_1'); if(res2_1.isCorrect) score++;
         let res2_2 = gradeAnswer('q2_2'); if(res2_2.isCorrect) score++;
@@ -301,10 +320,10 @@
         let res5_3 = gradeAnswer('q5_3'); if(res5_3.isCorrect) score++;
 
         const payload = {
-            "👨‍🎓 Ученик": name,
-            "🏆 ИТОГОВЫЙ БАЛЛ": `${score} из ${maxScore}`,
-            "⚠️ Попыток списать (уходов с вкладки)": cheats,
-            "------ ЗАДАНИЕ 1 (Word Formation) ------": "----------------------------------",
+            "Ученик": name,
+            "ИТОГОВЫЙ БАЛЛ": score + " из " + maxScore,
+            "Попыток списать (уходов с вкладки)": cheats,
+            "--- ЗАДАНИЕ 1 (Word Formation) ---": "---",
             "1.1 (SERIOUS)": res2_1.text,
             "1.2 (DEVELOP)": res2_2.text,
             "1.3 (KIND)": res2_3.text,
@@ -312,14 +331,14 @@
             "1.5 (SAD)": res2_5.text,
             "1.6 (MAD)": res2_6.text,
             "1.7 (ACHIEVE)": res2_7.text,
-            "------ ЗАДАНИЕ 2 (Prepositions) ------": "----------------------------------",
+            "--- ЗАДАНИЕ 2 (Prepositions) ---": "---",
             "2.1 (setting...)": res4_1.text,
             "2.2 (set... already)": res4_2.text,
             "2.3 (set... early)": res4_3.text,
             "2.4 (tickets... airport)": res4_4.text,
             "2.5 (traffic... motorway)": res4_5.text,
             "2.6 (cars left... hire)": res4_6.text,
-            "------ ЗАДАНИЕ 3 (Vocab & Reported) ------": "----------------------------------",
+            "--- ЗАДАНИЕ 3 (Vocab & Reported) ---": "---",
             "3.1 (Rome)": res5_1.text,
             "3.2 (towel)": res5_2.text,
             "3.3 (Columbus)": res5_3.text,
@@ -328,23 +347,29 @@
             "3.6 (Reported 3)": (document.getElementById('q5_6').value || "[пусто]") + " (Ручная проверка)"
         };
 
-        // Единственный способ работающий в Android/Telegram (content:// протокол):
-        // обычный form.submit() — страница перейдёт на Formspree, данные придут на почту
-        const form = document.createElement("form");
-        form.method = "POST";
-        form.action = FORM_URL;
-        form.style.display = "none";
+        try {
+            const response = await fetch(FORM_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
 
-        for (const key in payload) {
-            const input = document.createElement("input");
-            input.type = "hidden";
-            input.name = key;
-            input.value = payload[key];
-            form.appendChild(input);
+            if (response.ok) {
+                status.className = "status-success";
+                status.innerText = "✅ Ответы успешно отправлены! Результат: " + score + " из " + maxScore;
+                btn.innerText = "Отправлено!";
+            } else {
+                throw new Error("Server error");
+            }
+        } catch (err) {
+            status.className = "status-error";
+            status.innerText = "❌ Ошибка отправки. Проверьте интернет-соединение и попробуйте снова.";
+            btn.disabled = false;
+            btn.innerText = "Повторить отправку";
         }
-
-        document.body.appendChild(form);
-        form.submit();
     }
 </script>
 
