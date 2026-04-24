@@ -281,12 +281,10 @@
     }
 
     async function submitTest(event) {
-        // Предотвращаем любые дефолтные действия браузера на телефонах
         if (event) {
             event.preventDefault();
         }
 
-        // Прячем клавиатуру на телефоне, чтобы она не вызывала багов при изменении верстки
         if (document.activeElement) {
             document.activeElement.blur();
         }
@@ -309,7 +307,6 @@
         status.innerText = "⏳ Отправка результатов...";
 
         try {
-            // Теперь весь сбор данных находится внутри try...catch, чтобы скрипт не падал "молча"
             let score = 0;
             const maxScore = 16; 
 
@@ -360,13 +357,18 @@
                 "3.6 (Reported 3)": (document.getElementById('q5_6').value || "[пусто]") + " (Ручная проверка)"
             };
 
+            // Создаем форму программно, чтобы обойти блокировки JSON на телефонах
+            const formData = new FormData();
+            for (const key in payload) {
+                formData.append(key, payload[key]);
+            }
+
             const response = await fetch(FORM_URL, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
-                body: JSON.stringify(payload)
+                body: formData // Отправляем как FormData, а не JSON
             });
 
             if (response.ok) {
@@ -374,11 +376,11 @@
                 status.innerText = "✅ Ответы успешно отправлены! Результат: " + score + " из " + maxScore;
                 btn.innerText = "Отправлено!";
             } else {
-                throw new Error("Сервер Форм не принял запрос. Проверьте настройки Formspree.");
+                throw new Error("Форма отклонила запрос. Код: " + response.status);
             }
         } catch (err) {
             status.className = "status-error";
-            status.innerText = "❌ Ошибка: " + err.message;
+            status.innerText = "❌ Ошибка: " + err.message + ". Попробуй залить файл на GitHub Pages.";
             btn.disabled = false;
             btn.innerText = "Повторить отправку";
         }
