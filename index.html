@@ -3,148 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>English Progress Check - Module 6</title>
+    <title>English Test Module 6</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --success: #16a34a;
-            --bg: #f3f4f6;
-            --card: #ffffff;
-            --text: #1f2937;
-            --border: #e5e7eb;
-        }
+        :root { --primary: #2563eb; --success: #16a34a; --bg: #f3f4f6; --card: #ffffff; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 15px;
-            line-height: 1.5;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--card);
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        h1 { text-align: center; color: var(--primary); margin: 0 0 5px 0; font-size: 22px; }
-        .subtitle { text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 25px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #1f2937; }
+        .container { max-width: 600px; margin: 0 auto; background: var(--card); padding: 20px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: var(--primary); font-size: 22px; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 20px; }
         
-        .input-group {
-            background: #eff6ff;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border: 1px solid #dbeafe;
-        }
+        .input-group { background: #eff6ff; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #dbeafe; }
         label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 15px; }
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 16px; /* Prevents zoom on iOS */
-            font-family: inherit;
-            transition: border-color 0.2s;
-            background: #fff;
-        }
-        input[type="text"]:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
+        input[type="text"] { width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; font-family: inherit; background: #fff; }
+        input[type="text"]:focus { border-color: var(--primary); outline: none; }
 
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 25px 0 15px;
-            padding-left: 10px;
-            border-left: 4px solid var(--primary);
-            color: #111827;
-        }
-
-        .question { margin-bottom: 15px; font-size: 15px; }
-        .question strong { color: #dc2626; font-weight: 700; }
+        .section-title { font-size: 17px; font-weight: 700; margin: 20px 0 10px; padding-left: 10px; border-left: 4px solid var(--primary); color: #111827; }
+        .question { margin-bottom: 12px; font-size: 15px; line-height: 1.4; }
+        .question strong { color: #dc2626; }
         
-        .btn-submit {
-            background: var(--success);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 16px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            margin-top: 30px;
-            box-shadow: 0 4px 6px rgba(22, 163, 74, 0.2);
-            transition: background 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            -webkit-appearance: none;
-        }
-        .btn-submit:active { background: #15803d; transform: scale(0.98); }
+        .btn-submit { background: var(--success); color: white; border: none; width: 100%; padding: 16px; font-size: 18px; font-weight: 700; border-radius: 12px; cursor: pointer; margin-top: 20px; box-shadow: 0 4px 6px rgba(22, 163, 74, 0.2); -webkit-appearance: none; }
+        .btn-submit:active { transform: scale(0.98); background: #15803d; }
         .btn-submit:disabled { background: #9ca3af; cursor: not-allowed; }
 
-        #status {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 600;
-            display: none;
-        }
+        #status { margin-top: 15px; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600; display: none; font-size: 14px; }
         .status-success { background: #dcfce7; color: #166534; display: block; }
         .status-error { background: #fee2e2; color: #991b1b; display: block; }
         .status-loading { background: #dbeafe; color: #1e40af; display: block; }
 
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 3px solid rgba(30, 64, 175, 0.3);
-            border-top-color: #1e40af;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(30, 64, 175, 0.3); border-top-color: #1e40af; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .backup-section {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background: #fffbeb;
-            border: 1px solid #fcd34d;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .backup-textarea {
-            width: 100%;
-            height: 100px;
-            margin-top: 10px;
-            padding: 8px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 12px;
-            font-family: monospace;
-        }
-        .copy-btn {
-            background: #f59e0b;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            margin-top: 10px;
-            width: 100%;
-        }
+        .backup-section { display: none; margin-top: 20px; padding: 15px; background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; text-align: center; }
+        .backup-textarea { width: 100%; height: 120px; margin-top: 10px; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 12px; font-family: monospace; resize: vertical; }
+        .copy-btn { background: #f59e0b; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: 600; margin-top: 10px; width: 100%; font-size: 15px; }
     </style>
 </head>
 <body>
@@ -154,38 +46,35 @@
     <div class="subtitle">Module 6: Final Test</div>
 
     <div class="input-group">
-        <label for="studentName">Student Name (Фамилия Имя):</label>
+        <label for="studentName">Student Name:</label>
         <input type="text" id="studentName" placeholder="Ivanov Ivan" autocomplete="name">
     </div>
 
     <form id="quizForm">
-        <!-- Word Formation -->
         <div class="section-title">1. Word Formation</div>
-        <div class="question">1. I don't think you understand the <input type="text" id="q1" placeholder="..."> of the problem. (SERIOUS)</div>
-        <div class="question">2. Tom is going to stay in a new luxury <input type="text" id="q2" placeholder="..."> next to the beach. (DEVELOP)</div>
-        <div class="question">3. Ian thanked his hosts for their <input type="text" id="q3" placeholder="...">. (KIND)</div>
-        <div class="question">4. We play board games on long journeys for <input type="text" id="q4" placeholder="...">. (AMUSE)</div>
-        <div class="question">5. At the end of my holiday, I always feel a bit of <input type="text" id="q5" placeholder="...">. (SAD)</div>
-        <div class="question">6. For some people, travelling alone is plain <input type="text" id="q6" placeholder="...">. (MAD)</div>
-        <div class="question">7. You should be proud of your <input type="text" id="q7" placeholder="...">. (ACHIEVE)</div>
+        <div class="question">1. ... the <input type="text" id="q1" placeholder="..."> ... (SERIOUS)</div>
+        <div class="question">2. ... luxury <input type="text" id="q2" placeholder="..."> ... (DEVELOP)</div>
+        <div class="question">3. ... their <input type="text" id="q3" placeholder="...">. (KIND)</div>
+        <div class="question">4. ... for <input type="text" id="q4" placeholder="...">. (AMUSE)</div>
+        <div class="question">5. ... feel <input type="text" id="q5" placeholder="...">. (SAD)</div>
+        <div class="question">6. ... plain <input type="text" id="q6" placeholder="...">. (MAD)</div>
+        <div class="question">7. ... your <input type="text" id="q7" placeholder="...">. (ACHIEVE)</div>
 
-        <!-- Phrasal Verbs -->
-        <div class="section-title">2. Phrasal Verbs & Prepositions</div>
-        <div class="question">1. I have been setting <input type="text" id="q8" placeholder="..."> a bit of money.</div>
-        <div class="question">2. Winter has started to set <input type="text" id="q9" placeholder="..."> already.</div>
-        <div class="question">3. A two-hour delay set us <input type="text" id="q10" placeholder="...">.</div>
-        <div class="question">4. I'm picking up my tickets <input type="text" id="q11" placeholder="..."> the airport.</div>
-        <div class="question">5. We got stuck in traffic <input type="text" id="q12" placeholder="..."> the motorway.</div>
-        <div class="question">6. There aren't any cars left <input type="text" id="q13" placeholder="..."> hire.</div>
+        <div class="section-title">2. Prepositions</div>
+        <div class="question">1. setting <input type="text" id="q8" placeholder="..."> a bit</div>
+        <div class="question">2. set <input type="text" id="q9" placeholder="..."> already</div>
+        <div class="question">3. set us <input type="text" id="q10" placeholder="..."></div>
+        <div class="question">4. tickets <input type="text" id="q11" placeholder="..."> airport</div>
+        <div class="question">5. traffic <input type="text" id="q12" placeholder="..."> motorway</div>
+        <div class="question">6. left <input type="text" id="q13" placeholder="..."> hire</div>
 
-        <!-- Vocabulary -->
-        <div class="section-title">3. Vocabulary & Reported Speech</div>
-        <div class="question">1. We [arrived / got / reached] Rome early.<br>Answer: <input type="text" id="q14" class="long-input" placeholder="..."></div>
-        <div class="question">2. Helen, can you [collect / fetch / deliver] a towel?<br>Answer: <input type="text" id="q15" class="long-input" placeholder="..."></div>
-        <div class="question">3. The documentary follows Columbus' [voyage / journey / trip].<br>Answer: <input type="text" id="q16" class="long-input" placeholder="..."></div>
-        <div class="question">4. "Can you help me?" -> He asked me <input type="text" id="q17" class="long-input" placeholder="..."></div>
-        <div class="question">5. "I am tired." -> She told me <input type="text" id="q18" class="long-input" placeholder="..."></div>
-        <div class="question">6. "Don't be late!" -> The teacher told us <input type="text" id="q19" class="long-input" placeholder="..."></div>
+        <div class="section-title">3. Vocabulary</div>
+        <div class="question">1. Rome: <input type="text" id="q14" placeholder="..."></div>
+        <div class="question">2. Towel: <input type="text" id="q15" placeholder="..."></div>
+        <div class="question">3. Columbus: <input type="text" id="q16" placeholder="..."></div>
+        <div class="question">4. Reported 1: <input type="text" id="q17" class="long-input" placeholder="..."></div>
+        <div class="question">5. Reported 2: <input type="text" id="q18" class="long-input" placeholder="..."></div>
+        <div class="question">6. Reported 3: <input type="text" id="q19" class="long-input" placeholder="..."></div>
     </form>
 
     <button type="button" id="submitBtn" class="btn-submit">SEND ANSWERS</button>
@@ -193,22 +82,22 @@
     <div id="status"></div>
 
     <div class="backup-section" id="backupSection">
-        <p>⚠️ Если отправка не прошла, скопируйте текст ниже и отправьте учителю вручную:</p>
+        <p>⚠️ Server timeout. Copy and send manually:</p>
         <textarea class="backup-textarea" id="backupText" readonly></textarea>
-        <button class="copy-btn" id="copyBtn">📋 Копировать текст</button>
+        <button class="copy-btn" id="copyBtn">📋 Copy Text</button>
     </div>
 </div>
 
 <script>
 (function() {
-    // Используем FormSubmit.co - он надежнее работает с GitHub Pages
+    // FormSubmit URL
     const FORM_URL = "https://formsubmit.co/ajax/i45771901@gmail.com";
     
-    const correctAnswers = {
-        q1: 'seriousness', q2: 'development', q3: 'kindness', q4: 'amusement', 
-        q5: 'sadness', q6: 'madness', q7: 'achievement',
-        q8: 'aside', q9: 'in', q10: 'back', q11: 'at', q12: 'on', q13: 'for',
-        q14: 'reached', q15: 'fetch', q16: 'voyage'
+    const answers = {
+        q1:'seriousness', q2:'development', q3:'kindness', q4:'amusement', 
+        q5:'sadness', q6:'madness', q7:'achievement',
+        q8:'aside', q9:'in', q10:'back', q11:'at', q12:'on', q13:'for',
+        q14:'reached', q15:'fetch', q16:'voyage'
     };
 
     function getVal(id) {
@@ -216,113 +105,98 @@
         return el ? el.value.trim() : "";
     }
 
-    function calculateResults() {
-        const name = getVal('studentName');
-        let score = 0;
-        let details = [];
-        const ids = Object.keys(correctAnswers);
-
-        ids.forEach((id, index) => {
-            const val = getVal(id);
-            const isCorrect = val.toLowerCase() === correctAnswers[id];
-            if (isCorrect) score++;
-            details.push(`Q${index+1}: ${val || '[empty]'} ${isCorrect ? '(OK)' : '(Error: ' + correctAnswers[id] + ')'}`);
-        });
-
-        // Добавляем ручные вопросы
-        ['q17', 'q18', 'q19'].forEach((id, i) => {
-            details.push(`Q${17+i}: ${getVal(id) || '[empty]'}`);
-        });
-
-        return {
-            name: name,
-            score: score,
-            total: 16,
-            details: details.join('\n'),
-            raw: {
-                'Student Name': name,
-                'Score': `${score} / 16`,
-                'Date': new Date().toLocaleString(),
-                'Details': details
-            }
-        };
-    }
-
     document.getElementById('submitBtn').addEventListener('click', function() {
         const btn = this;
         const statusDiv = document.getElementById('status');
         const name = getVal('studentName');
 
-        if (!name) {
-            alert("Please enter your name first!");
-            document.getElementById('studentName').focus();
-            return;
-        }
+        if (!name) { alert("Enter name!"); document.getElementById('studentName').focus(); return; }
 
-        // Блокируем кнопку
         btn.disabled = true;
         btn.innerHTML = '<span class="spinner"></span> Sending...';
         statusDiv.className = 'status-loading';
-        statusDiv.innerHTML = '<span class="spinner"></span> Sending results...';
+        statusDiv.innerHTML = '<span class="spinner"></span> Connecting (wait up to 60s)...';
 
-        const data = calculateResults();
+        // 1. Считаем результат
+        let score = 0;
+        let details = [];
+        
+        // Проверяем автоматические вопросы (1-16)
+        for (let i = 1; i <= 16; i++) {
+            let id = 'q' + i;
+            let val = getVal(id);
+            let correct = answers[id];
+            if (val.toLowerCase() === correct) score++;
+            // Формируем короткую строку: Q1: answer (OK/Error)
+            details.push(`Q${i}:${val || '-'}:${val.toLowerCase()===correct?'OK':correct}`);
+        }
+        
+        // Добавляем ручные вопросы (17-19) без проверки
+        for (let i = 17; i <= 19; i++) {
+            details.push(`Q${i}:${getVal('q'+i) || '-'}`);
+        }
 
-        // Отправляем через Fetch
+        // 2. Формируем МИНИМАЛЬНЫЙ payload (только текст, без лишних объектов)
+        // Это уменьшает размер пакета данных
+        const payload = {
+            _subject: `Test Result: ${name}`, // Тема письма
+            name: name,
+            score: score + "/16",
+            answers: details.join("|") // Объединяем все ответы в одну строку через разделитель
+        };
+
+        // 3. Отправка с увеличенным временем ожидания
+        // Используем AbortController для ручного контроля таймаута (60 сек)
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 секунд
+
         fetch(FORM_URL, {
             method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(data.raw)
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload),
+            signal: controller.signal
         })
-        .then(function(response) {
+        .then(response => {
+            clearTimeout(timeoutId);
             if (response.ok) {
                 statusDiv.className = 'status-success';
-                statusDiv.innerHTML = '✅ Sent successfully! Score: ' + data.score + '/16';
-                btn.innerHTML = '✅ Sent';
-                btn.style.background = '#16a34a';
-                
-                // Скрываем форму после отправки
+                statusDiv.innerHTML = `✅ Sent! Score: ${score}/16`;
+                btn.innerHTML = '✅ Done';
                 document.getElementById('quizForm').style.pointerEvents = 'none';
-                document.getElementById('quizForm').style.opacity = '0.6';
             } else {
                 throw new Error('Server error');
             }
         })
-        .catch(function(err) {
+        .catch(err => {
+            clearTimeout(timeoutId);
             console.error(err);
             statusDiv.className = 'status-error';
-            statusDiv.innerHTML = '❌ Connection error. Use backup below.';
+            statusDiv.innerHTML = '❌ Timeout/Error. Use backup below.';
             btn.disabled = false;
             btn.innerHTML = 'Try Again';
             
-            // Показываем резервный вариант
-            const backupSection = document.getElementById('backupSection');
-            const backupText = document.getElementById('backupText');
-            backupSection.style.display = 'block';
-            backupText.value = "STUDENT: " + data.name + "\nSCORE: " + data.score + "/16\n\n" + data.details;
+            // Показываем резерв
+            const backup = document.getElementById('backupSection');
+            const textArea = document.getElementById('backupText');
+            backup.style.display = 'block';
             
-            // Прокрутка к резерву
-            setTimeout(() => {
-                backupSection.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+            // Формируем читаемый текст для резерва
+            let manualText = `NAME: ${name}\nSCORE: ${score}/16\n----------------\n`;
+            details.forEach(d => {
+                let parts = d.split(':');
+                manualText += `${parts[0]} Answer: ${parts[1]} (Correct: ${parts[2] || 'N/A'})\n`;
+            });
+            textArea.value = manualText;
+            backup.scrollIntoView({ behavior: 'smooth' });
         });
     });
 
-    // Кнопка копирования резерва
     document.getElementById('copyBtn').addEventListener('click', function() {
-        const textarea = document.getElementById('backupText');
-        textarea.select();
-        try {
-            document.execCommand('copy');
-            this.textContent = '✅ Copied!';
-            setTimeout(() => this.textContent = '📋 Copy Text', 2000);
-        } catch(e) {
-            alert('Copy manually please');
-        }
+        const t = document.getElementById('backupText');
+        t.select();
+        try { document.execCommand('copy'); this.textContent = '✅ Copied!'; setTimeout(()=>this.textContent='📋 Copy Text', 2000); } 
+        catch(e) { alert('Copy manually'); }
     });
-
 })();
 </script>
 
