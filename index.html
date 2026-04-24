@@ -3,511 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>English Progress Check - Module 6</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>English Test Module 6</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --bg-gradient: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-            --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --input-focus: rgba(79, 70, 229, 0.2);
-            --success: #10b981;
-            --error: #ef4444;
+            --primary: #2563eb;
+            --success: #16a34a;
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --text: #1f2937;
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; /* Убирает синий фон при тапе на Android */
-        }
-
-        body { 
-            font-family: 'Inter', sans-serif; 
-            max-width: 850px; 
-            margin: 0 auto; 
-            padding: 20px 15px; 
-            background: var(--bg-gradient); 
-            color: var(--text-main);
-            min-height: 100vh;
-            /* Предотвращает зум при двойном тапе */
-            touch-action: manipulation; 
-        }
-
-        .container { 
-            background: var(--card-bg); 
-            padding: 30px; 
-            border-radius: 24px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-        }
-
-        @media (max-width: 600px) {
-            body { padding: 10px; }
-            .container { padding: 20px 15px; border-radius: 16px; }
-        }
-
-        .header { text-align: center; margin-bottom: 30px; }
-
-        h1 { 
-            color: var(--primary); 
-            font-size: 24px;
-            font-weight: 700;
-            margin: 0 0 10px 0;
-        }
-
-        .subtitle { color: var(--text-muted); font-size: 15px; }
-
-        .student-info {
-            background: #f8fafc;
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
             padding: 20px;
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%; /* Фикс зума текста на iOS */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card);
+            padding: 25px;
             border-radius: 16px;
-            margin-bottom: 25px;
-            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .student-info label {
-            font-weight: 600;
-            color: var(--text-main);
-            font-size: 15px;
-            display: block;
-            margin-bottom: 8px;
-        }
+        h1 { text-align: center; color: var(--primary); font-size: 24px; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 25px; }
 
-        h2 { 
-            color: var(--text-main); 
-            font-size: 1.2em; 
-            margin-top: 0; 
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid #f3f4f6;
-            padding-bottom: 10px;
-        }
-
-        h2::before {
-            content: '';
-            display: inline-block;
-            width: 5px;
-            height: 20px;
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        .exercise { 
-            margin-bottom: 25px; 
-            background: #ffffff; 
-            padding: 20px; 
-            border-radius: 16px; 
-            border: 1px solid var(--border);
-        }
-
-        .exercise > p {
-            color: var(--text-muted);
-            font-style: italic;
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-
-        .question { 
-            margin-bottom: 15px; 
-            line-height: 1.6; 
-            font-size: 15px;
-            position: relative;
-        }
-
-        input[type="text"] { 
-            padding: 10px 12px; 
-            border: 2px solid var(--border); 
-            border-radius: 8px; 
-            width: 100%; 
-            max-width: 250px;
-            font-size: 16px; /* 16px предотвращает зум на iPhone при фокусе */
-            font-family: inherit;
-            transition: all 0.2s ease; 
-            background: #f9fafb;
-            -webkit-appearance: none;
-        }
-
-        input[type="text"]:focus { 
-            border-color: var(--primary); 
-            background: #ffffff;
-            outline: none; 
-            box-shadow: 0 0 0 3px var(--input-focus); 
-        }
-
-        .long-input { 
-            max-width: 100% !important; 
-            margin-top: 5px; 
-        }
-
-        /* Кнопка оптимизирована для пальцев */
-        .submit-btn { 
-            background: var(--primary); 
-            color: white; 
-            padding: 16px; 
-            border: none; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            width: 100%; 
-            font-size: 18px; 
-            font-weight: 700; 
-            margin-top: 20px; 
-            transition: transform 0.1s, background 0.2s; 
-            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
-            -webkit-appearance: none;
-            touch-action: manipulation;
-            text-align: center;
-            display: block;
-            user-select: none;
-        }
-
-        .submit-btn:active {
-            transform: scale(0.98);
-            background: var(--primary-hover);
-        }
-
-        .submit-btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        #status { 
-            text-align: center; 
-            margin-top: 20px; 
-            font-weight: 600; 
-            padding: 15px; 
-            border-radius: 10px; 
-            display: none; 
-            font-size: 15px;
-        }
-
-        .status-success { background: #d1fae5; color: #065f46; display: block; border: 1px solid #a7f3d0; }
-        .status-error { background: #fee2e2; color: #991b1b; display: block; border: 1px solid #fecaca; }
-        .status-loading { background: #eff6ff; color: #1e40af; display: block; border: 1px solid #dbeafe; }
-
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(30, 64, 175, 0.3);
-            border-top-color: #1e40af;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Скрытые элементы защиты */
-        .copy-trap, .ocr-trap { display: none; }
-
-        /* Резервная секция */
-        .backup-section {
-            display: none;
-            margin-top: 25px;
-            padding: 20px;
-            background: #fffbeb;
-            border: 2px solid #f59e0b;
+        .input-group {
+            background: #eff6ff;
+            padding: 15px;
             border-radius: 12px;
-            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid #dbeafe;
         }
-        .backup-section p { margin: 0 0 15px; font-size: 14px; color: #92400e; line-height: 1.5; }
-        .backup-textarea {
+
+        label { font-weight: 600; display: block; margin-bottom: 8px; font-size: 15px; }
+        
+        input[type="text"] {
             width: 100%;
-            min-height: 150px;
-            font-size: 12px;
-            font-family: monospace;
-            padding: 10px;
-            border: 1px solid #d1d5db;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
             border-radius: 8px;
-            margin-bottom: 15px;
-            resize: vertical;
+            font-size: 16px; /* 16px предотвращает зум на iPhone */
+            box-sizing: border-box;
+            font-family: inherit;
+            transition: border-color 0.2s;
         }
-        .copy-btn {
-            background: #f59e0b;
+
+        input[type="text"]:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f3f4f6;
+            color: var(--text);
+        }
+
+        .question { margin-bottom: 15px; font-size: 15px; }
+        .question strong { color: var(--primary); }
+        
+        .btn-submit {
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
             width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+            transition: transform 0.1s;
+            -webkit-appearance: none;
         }
-        .copy-btn:active { background: #d97706; }
+
+        .btn-submit:active { transform: scale(0.98); background: #1d4ed8; }
+        .btn-submit:disabled { background: #9ca3af; cursor: not-allowed; }
+
+        #status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+        .status-success { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .status-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+        /* Скрытое поле для защиты от ботов */
+        input[name="_gotcha"] { display: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
-        <h1>English Progress Check</h1>
-        <div class="subtitle">Module 6: Final Test</div>
-    </div>
+    <h1>English Progress Check</h1>
+    <div class="subtitle">Module 6: Final Test</div>
 
-    <div class="student-info">
-        <label for="studentName">Student's Full Name / Фамилия и Имя:</label>
-        <input type="text" id="studentName" class="long-input" placeholder="Например: Ivanov Ivan" autocomplete="name">
-    </div>
+    <!-- Форма отправляет данные напрямую на FormSubmit.co -->
+    <form id="quizForm" action="https://formsubmit.co/i45771901@gmail.com" method="POST">
+        
+        <!-- Настройки FormSubmit -->
+        <input type="hidden" name="_subject" value="📝 НОВЫЙ ТЕСТ: Module 6 Results">
+        <input type="hidden" name="_captcha" value="false"> <!-- Отключаем капчу для удобства -->
+        <input type="hidden" name="_next" value="https://formsucess.co"> <!-- Заглушка, чтобы не редиректило далеко -->
+        <input type="hidden" name="_template" value="table"> <!-- Красивая таблица в письме -->
+        <input type="text" name="_gotcha" style="display:none"> <!-- Honey pot -->
 
-    <form id="quizForm" onsubmit="return false;">
-        <div class="exercise">
-            <h2>Word Formation (Nouns)</h2>
-            <p>Complete the sentences with nouns derived from the words in bold.</p>
-            
-            <div class="question">1. I don't think you understand the <input type="text" id="q2_1" placeholder="..." autocomplete="off"> of the problem. <strong>(SERIOUS)</strong></div>
-            <div class="question">2. Tom is going to stay in a new luxury <input type="text" id="q2_2" placeholder="..." autocomplete="off"> next to the beach. <strong>(DEVELOP)</strong></div>
-            <div class="question">3. Ian thanked his hosts for their <input type="text" id="q2_3" placeholder="..." autocomplete="off">. <strong>(KIND)</strong></div>
-            <div class="question">4. We play board games on long journeys for <input type="text" id="q2_4" placeholder="..." autocomplete="off">. <strong>(AMUSE)</strong></div>
-            <div class="question">5. At the end of my holiday, I always feel a bit of <input type="text" id="q2_5" placeholder="..." autocomplete="off">. <strong>(SAD)</strong></div>
-            <div class="question">6. For some people, travelling alone is plain <input type="text" id="q2_6" placeholder="..." autocomplete="off">. <strong>(MAD)</strong></div>
-            <div class="question">7. You should be proud of your <input type="text" id="q2_7" placeholder="..." autocomplete="off">. <strong>(ACHIEVE)</strong></div>
+        <div class="input-group">
+            <label for="studentName">Student's Full Name / Фамилия и Имя:</label>
+            <input type="text" id="studentName" name="Student_Name" required placeholder="Ivanov Ivan">
         </div>
 
-        <div class="exercise">
-            <h2>Phrasal Verbs & Prepositions</h2>
-            <p>Fill in the correct particle or preposition.</p>
+        <div class="section-title">1. Word Formation (Nouns)</div>
+        <p style="font-size:13px; color:#666; margin-top:-10px; margin-bottom:15px;">Complete with nouns from words in bold.</p>
+        
+        <div class="question">1. I don't think you understand the <input type="text" name="Q1_Serious" placeholder="..." required> of the problem. <strong>(SERIOUS)</strong></div>
+        <div class="question">2. Tom is going to stay in a new luxury <input type="text" name="Q2_Develop" placeholder="..." required> next to the beach. <strong>(DEVELOP)</strong></div>
+        <div class="question">3. Ian thanked his hosts for their <input type="text" name="Q3_Kind" placeholder="..." required>. <strong>(KIND)</strong></div>
+        <div class="question">4. We play board games on long journeys for <input type="text" name="Q4_Amuse" placeholder="..." required>. <strong>(AMUSE)</strong></div>
+        <div class="question">5. At the end of my holiday, I always feel a bit of <input type="text" name="Q5_Sad" placeholder="..." required>. <strong>(SAD)</strong></div>
+        <div class="question">6. For some people, travelling alone is plain <input type="text" name="Q6_Mad" placeholder="..." required>. <strong>(MAD)</strong></div>
+        <div class="question">7. You should be proud of your <input type="text" name="Q7_Achieve" placeholder="..." required>. <strong>(ACHIEVE)</strong></div>
 
-            <div class="question">1. I have been setting <input type="text" id="q4_1" placeholder="..." autocomplete="off"> a bit of money all year for holidays.</div>
-            <div class="question">2. Winter has started to set <input type="text" id="q4_2" placeholder="..." autocomplete="off"> already, so we can go skiing.</div>
-            <div class="question">3. A two-hour delay on the way to the ferry set us <input type="text" id="q4_3" placeholder="..." autocomplete="off">.</div>
-            <div class="question">4. I'm picking up my tickets <input type="text" id="q4_4" placeholder="..." autocomplete="off"> the airport.</div>
-            <div class="question">5. We got stuck in traffic <input type="text" id="q4_5" placeholder="..." autocomplete="off"> the motorway.</div>
-            <div class="question">6. There aren't any cars left <input type="text" id="q4_6" placeholder="..." autocomplete="off"> hire on the island.</div>
+        <div class="section-title">2. Phrasal Verbs & Prepositions</div>
+        <p style="font-size:13px; color:#666; margin-top:-10px; margin-bottom:15px;">Fill in the correct particle.</p>
+
+        <div class="question">1. I have been setting <input type="text" name="Q8_Setting" placeholder="..." required> a bit of money all year.</div>
+        <div class="question">2. Winter has started to set <input type="text" name="Q9_SetWinter" placeholder="..." required> already.</div>
+        <div class="question">3. A two-hour delay set us <input type="text" name="Q10_SetUs" placeholder="..." required>.</div>
+        <div class="question">4. I'm picking up tickets <input type="text" name="Q11_Tickets" placeholder="..." required> the airport.</div>
+        <div class="question">5. We got stuck in traffic <input type="text" name="Q12_Traffic" placeholder="..." required> the motorway.</div>
+        <div class="question">6. There aren't any cars left <input type="text" name="Q13_Hire" placeholder="..." required> hire.</div>
+
+        <div class="section-title">3. Vocabulary & Reported Speech</div>
+        
+        <div class="question">1. We [arrived / got / reached] Rome.<br><input type="text" name="Q14_Rome" placeholder="Answer..." required></div>
+        <div class="question">2. Can you [collect / fetch / deliver] a towel?<br><input type="text" name="Q15_Towel" placeholder="Answer..." required></div>
+        <div class="question">3. The documentary follows Columbus' [voyage / journey / trip].<br><input type="text" name="Q16_Voyage" placeholder="Answer..." required></div>
+        
+        <div class="question" style="margin-top:15px; background:#f9fafb; padding:10px; border-radius:8px;">
+            4. <i>"Can you help me?"</i> -> My best friend asked me...<br>
+            <input type="text" name="Q17_Reported1" class="long-input" placeholder="Type full sentence..." style="margin-top:5px;">
+        </div>
+        <div class="question" style="background:#f9fafb; padding:10px; border-radius:8px;">
+            5. <i>"I am tired."</i> -> My mother told me...<br>
+            <input type="text" name="Q18_Reported2" class="long-input" placeholder="Type full sentence..." style="margin-top:5px;">
+        </div>
+        <div class="question" style="background:#f9fafb; padding:10px; border-radius:8px;">
+            6. <i>"Don't be late!"</i> -> The headmaster told us...<br>
+            <input type="text" name="Q19_Reported3" class="long-input" placeholder="Type full sentence..." style="margin-top:5px;">
         </div>
 
-        <div class="exercise">
-            <h2>Vocabulary & Reported Speech</h2>
-            <p>Choose the correct word or complete the reported sentence.</p>
+        <!-- Скрытое поле для автоматического подсчета баллов (JS заполнит перед отправкой) -->
+        <input type="hidden" name="Final_Score" id="finalScore">
+        <input type="hidden" name="Device_Info" id="deviceInfo">
 
-            <div class="question">1. We [arrived / got / reached] Rome early in the evening.<br><input type="text" id="q5_1" class="long-input" placeholder="Your answer..." autocomplete="off"></div>
-            <div class="question">2. Helen, can you [collect / fetch / deliver] a towel from bathroom?<br><input type="text" id="q5_2" class="long-input" placeholder="Your answer..." autocomplete="off"></div>
-            <div class="question">3. The documentary follows Columbus' [voyage / journey / trip].<br><input type="text" id="q5_3" class="long-input" placeholder="Your answer..." autocomplete="off"></div>
-            
-            <div class="question">4. <i>"Can you help me?"</i> -> My best friend asked me<br><input type="text" id="q5_4" class="long-input" placeholder="... if I could help him" autocomplete="off"></div>
-            <div class="question">5. <i>"I am tired."</i> -> My mother told me<br><input type="text" id="q5_5" class="long-input" placeholder="Continue the sentence..." autocomplete="off"></div>
-            <div class="question">6. <i>"Don't be late!"</i> -> The headmaster told us<br><input type="text" id="q5_6" class="long-input" placeholder="Continue the sentence..." autocomplete="off"></div>
-        </div>
-
-        <button type="button" id="submitBtn" class="submit-btn">Finish and Send Answers</button>
+        <button type="submit" class="btn-submit" id="submitBtn">FINISH & SEND TO TEACHER</button>
     </form>
 
     <div id="status"></div>
-
-    <div class="backup-section" id="backupSection">
-        <p>⚠️ <strong>Проблема с интернетом?</strong><br>Сервер не ответил. Скопируйте текст ниже и отправьте учителю в WhatsApp/Telegram:</p>
-        <textarea class="backup-textarea" id="backupText" readonly></textarea>
-        <button class="copy-btn" id="copyBtn">📋 Скопировать текст</button>
-        <p id="copyStatus" style="margin-top:10px; display:none; color:#059669; font-weight:bold;">✅ Скопировано в буфер!</p>
-    </div>
 </div>
 
 <script>
-(function() {
-    // ЧИСТЫЙ URL БЕЗ ПРОБЕЛОВ
-    const FORM_URL = "https://formspree.io/f/meevnelo";
-    
-    let isSending = false;
-    let cheatCount = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('quizForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusDiv = document.getElementById('status');
+        const scoreInput = document.getElementById('finalScore');
+        const deviceInput = document.getElementById('deviceInfo');
 
-    // Простой счетчик потери фокуса (анти-списывание)
-    window.addEventListener('blur', () => { cheatCount++; });
-
-    const correctAnswers = {
-        q2_1: "seriousness", q2_2: "development", q2_3: "kindness", 
-        q2_4: "amusement", q2_5: "sadness", q2_6: "madness", q2_7: "achievement",
-        q4_1: "aside", q4_2: "in", q4_3: "back", q4_4: "at", q4_5: "on", q4_6: "for",
-        q5_1: "reached", q5_2: "fetch", q5_3: "voyage"
-    };
-
-    function getVal(id) {
-        const el = document.getElementById(id);
-        return el ? el.value.trim() : "";
-    }
-
-    function gradeAnswer(id) {
-        const studentAns = getVal(id).toLowerCase();
-        const correctAns = correctAnswers[id];
-        const originalText = getVal(id) || "[пусто]";
-        
-        if (studentAns === correctAns) {
-            return { isCorrect: true, text: "✅ " + originalText };
-        } else {
-            return { isCorrect: false, text: "❌ " + originalText + " (Правильно: " + correctAns + ")" };
-        }
-    }
-
-    function prepareData() {
-        const name = getVal('studentName');
-        let score = 0;
-        const autoIds = [
-            'q2_1','q2_2','q2_3','q2_4','q2_5','q2_6','q2_7',
-            'q4_1','q4_2','q4_3','q4_4','q4_5','q4_6',
-            'q5_1','q5_2','q5_3'
-        ];
-
-        const results = {};
-        autoIds.forEach(id => {
-            const r = gradeAnswer(id);
-            results[id] = r;
-            if (r.isCorrect) score++;
-        });
-
-        // Формируем объект данных для отправки
-        const formData = {
-            "Student Name": name,
-            "Final Score": `${score} / 16`,
-            "Cheating Attempts": cheatCount,
-            "Date": new Date().toLocaleString(),
-            // Детализация
-            "Q1_Serious": results.q2_1.text,
-            "Q2_Develop": results.q2_2.text,
-            "Q3_Kind": results.q2_3.text,
-            "Q4_Amuse": results.q2_4.text,
-            "Q5_Sad": results.q2_5.text,
-            "Q6_Mad": results.q2_6.text,
-            "Q7_Achieve": results.q2_7.text,
-            "Q8_Setting": results.q4_1.text,
-            "Q9_SetWinter": results.q4_2.text,
-            "Q10_SetUs": results.q4_3.text,
-            "Q11_Tickets": results.q4_4.text,
-            "Q12_Traffic": results.q4_5.text,
-            "Q13_Hire": results.q4_6.text,
-            "Q14_Rome": results.q5_1.text,
-            "Q15_Towel": results.q5_2.text,
-            "Q16_Voyage": results.q5_3.text,
-            "Reported_1": getVal('q5_4') || "[пусто]",
-            "Reported_2": getVal('q5_5') || "[пусто]",
-            "Reported_3": getVal('q5_6') || "[пусто]"
+        // Правильные ответы для подсчета
+        const answers = {
+            'Q1_Serious': 'seriousness', 'Q2_Develop': 'development', 'Q3_Kind': 'kindness',
+            'Q4_Amuse': 'amusement', 'Q5_Sad': 'sadness', 'Q6_Mad': 'madness', 'Q7_Achieve': 'achievement',
+            'Q8_Setting': 'aside', 'Q9_SetWinter': 'in', 'Q10_SetUs': 'back',
+            'Q11_Tickets': 'at', 'Q12_Traffic': 'on', 'Q13_Hire': 'for',
+            'Q14_Rome': 'reached', 'Q15_Towel': 'fetch', 'Q16_Voyage': 'voyage'
         };
 
-        return { data: formData, score: score, name: name };
-    }
+        // Определяем устройство
+        const ua = navigator.userAgent;
+        let device = "PC";
+        if (/mobile/i.test(ua)) device = "Mobile (" + (/android/i.test(ua) ? "Android" : "iOS") + ")";
+        deviceInput.value = device;
 
-    function showBackup(dataObj) {
-        const section = document.getElementById('backupSection');
-        const textarea = document.getElementById('backupText');
-        const lines = [];
-        
-        lines.push(`STUDENT: ${dataObj.name}`);
-        lines.push(`SCORE: ${dataObj.score} / 16`);
-        lines.push(`-------------------------`);
-        
-        for (const key in dataObj.data) {
-            if (key !== "Student Name" && key !== "Final Score" && key !== "Cheating Attempts" && key !== "Date") {
-                lines.push(`${key}: ${dataObj.data[key]}`);
-            }
-        }
-        
-        textarea.value = lines.join("\n");
-        section.style.display = "block";
-        section.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-
-    // Обработчик кнопки копирования
-    document.getElementById('copyBtn').addEventListener('click', function() {
-        const textarea = document.getElementById('backupText');
-        textarea.select();
-        try {
-            document.execCommand('copy');
-            const status = document.getElementById('copyStatus');
-            status.style.display = 'block';
-            setTimeout(() => status.style.display = 'none', 3000);
-        } catch (err) {
-            alert("Не удалось скопировать автоматически. Выделите текст вручную.");
-        }
-    });
-
-    // ГЛАВНАЯ ФУНКЦИЯ ОТПРАВКИ
-    async function handleSubmit() {
-        if (isSending) return;
-
-        const name = getVal('studentName');
-        if (!name) {
-            alert("⚠️ Пожалуйста, введите ваше имя (Student's Name)!");
-            document.getElementById('studentName').focus();
-            // Небольшая вибрация на Android если поддерживается
-            if (navigator.vibrate) navigator.vibrate(200);
-            return;
-        }
-
-        isSending = true;
-        const btn = document.getElementById('submitBtn');
-        const statusDiv = document.getElementById('status');
-        
-        // Блокируем кнопку визуально
-        btn.disabled = true;
-        btn.innerHTML = '<span class="spinner"></span> Отправка...';
-        btn.style.opacity = '0.8';
-
-        statusDiv.className = 'status-loading';
-        statusDiv.style.display = 'block';
-        statusDiv.innerHTML = '<span class="spinner"></span> Проверяем ответы и отправляем...';
-
-        const payload = prepareData();
-
-        // Добавляем специальный параметр _next, чтобы Formspree не делал редирект, а возвращал JSON
-        // Это критично для работы AJAX на мобильных
-        const url = FORM_URL + "?next=" + encodeURIComponent(window.location.href);
-
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload.data)
-            });
-
-            if (response.ok) {
-                // УСПЕХ
-                statusDiv.className = 'status-success';
-                statusDiv.innerHTML = `✅ Отлично, ${name}! Результаты отправлены.<br>Ваш балл: ${payload.score} из 16.`;
-                btn.innerHTML = '✅ Отправлено';
-                btn.style.background = '#10b981';
-                
-                // Скрываем форму, чтобы не редактировали после отправки
-                document.getElementById('quizForm').style.pointerEvents = 'none';
-                document.getElementById('quizForm').style.opacity = '0.7';
-                
-                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-            } else {
-                throw new Error('Server error');
-            }
-        } catch (error) {
-            // ОШИБКА (нет интернета или сервер упал)
-            console.error(error);
-            statusDiv.className = 'status-error';
-            statusDiv.innerHTML = '❌ Ошибка соединения. Используйте резервный вариант ниже.';
-            btn.disabled = false;
-            btn.innerHTML = 'Попробовать снова';
-            btn.style.background = '#4f46e5';
+        form.addEventListener('submit', function(e) {
+            // Предварительный подсчет баллов перед отправкой
+            let score = 0;
+            let total = 0;
             
-            showBackup(payload);
-            if (navigator.vibrate) navigator.vibrate(400);
-        } finally {
-            isSending = false;
-        }
-    }
+            for (const [key, correctVal] of Object.entries(answers)) {
+                const input = form.querySelector(`[name="${key}"]`);
+                if (input) {
+                    total++;
+                    if (input.value.trim().toLowerCase() === correctVal.toLowerCase()) {
+                        score++;
+                    }
+                }
+            }
+            
+            // Записываем балл в скрытое поле, которое уйдет на почту
+            scoreInput.value = `${score} / ${total} (Auto-graded)`;
+            
+            // Визуальная обратная связь
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "⏳ Sending... Please wait";
+            submitBtn.style.background = "#9ca3af";
+            
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'status-success'; // Пока зеленый, если форма валидна
+            statusDiv.innerHTML = `✅ Processing ${score}/${total} points. Redirecting...`;
 
-    // Привязываем события
-    const btn = document.getElementById('submitBtn');
-    
-    // Используем click, но также добавляем touchstart для мгновенной реакции на старых iOS
-    btn.addEventListener('click', handleSubmit);
-    
-    // Предотвращаем двойное нажатие на тачскринах
-    btn.addEventListener('touchstart', function(e) {
-        if (!isSending) {
-            // e.preventDefault(); // Не предотвращаем, чтобы сработал click, но можно добавить логику
-        }
-    }, {passive: true});
-
-})();
+            // FormSubmit сам обработает отправку, нам нужно только дать ему корректные данные
+            // Мы не отменяем стандартную отправку (e.preventDefault()), чтобы работало на всех телефонах
+            // Но добавляем небольшую задержку для красоты UI, если бы мы делали AJAX. 
+            // В данном случае стандартная отправка формы самая надежная для мобильных.
+            
+            // Примечание: FormSubmit перенаправит пользователя на свою страницу "Спасибо".
+            // Чтобы вернуть его обратно, можно раскомментировать строку ниже и использовать AJAX, 
+            // но стандартная отправка надежнее всего пробивает файерволы мобильных операторов.
+        });
+    });
 </script>
 
 </body>
