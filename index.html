@@ -30,6 +30,8 @@
             background: var(--bg-gradient); 
             color: var(--text-main);
             min-height: 100vh;
+            /* Предотвращаем зум на iOS при тапе */
+            touch-action: manipulation;
         }
 
         .container { 
@@ -118,7 +120,7 @@
             border-radius: 10px; 
             width: 220px; 
             max-width: 100%;
-            font-size: 16px;
+            font-size: 16px; /* 16px предотвращает зум на iPhone */
             font-family: inherit;
             transition: all 0.3s ease; 
             background: #f9fafb;
@@ -157,10 +159,17 @@
             user-select: none;
             -webkit-user-select: none;
             text-align: center;
+            position: relative;
+            z-index: 10;
         }
 
         .submit-btn:active {
             transform: scale(0.98);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         #status { 
@@ -193,7 +202,7 @@
         .copy-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
         .ocr-trap { color: #fdfdfd; font-size: 4px; line-height: 1; user-select: none; margin: -5px 0; display: block; height: 1px; }
 
-        /* Backup form (скрытая) */
+        /* Backup form */
         .backup-section {
             display: none;
             margin-top: 20px;
@@ -294,6 +303,7 @@
 
 <script>
 (function() {
+    // ИСПРАВЛЕНО: Убраны лишние пробелы в URL
     var FORM_URL = "https://formspree.io/f/meevnelo";
     var cheats = 0;
     var isSending = false;
@@ -386,13 +396,11 @@
         textarea.value = lines.join("\n");
         section.style.display = "block";
         
-        // Прокрутить к backup секции
         setTimeout(function() {
             section.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 300);
     }
 
-    // Кнопка копирования
     document.getElementById('copyBtn').addEventListener('click', function() {
         var textarea = document.getElementById('backupText');
         textarea.select();
@@ -410,28 +418,30 @@
         var status = document.getElementById('status');
         var btn = document.getElementById('btn');
 
-        // Таймаут: если через 12 сек нет ответа — показать backup
+        // Таймаут увеличен до 15 сек для мобильных сетей
         var timeoutId = setTimeout(function() {
             if (isSending) {
                 isSending = false;
                 status.className = "status-error";
                 status.innerHTML = "⚠️ Сервер долго не отвечает. Используйте запасной вариант ниже.";
                 btn.innerText = "Попробовать снова";
-                btn.style.pointerEvents = 'auto';
-                btn.style.opacity = '1';
+                btn.disabled = false;
                 showBackup(payload);
             }
-        }, 12000);
+        }, 15000);
 
-        // Пробуем fetch
         if (window.fetch) {
+            // Добавлен mode: 'no-cors' может помочь в некоторых случаях, но лучше стандартный POST
+            // Используем стандартный POST с правильными заголовками
             fetch(FORM_URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json"
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
+                // Важно для мобильных: не кешировать запрос
+                cache: 'no-cache'
             })
             .then(function(response) {
                 clearTimeout(timeoutId);
@@ -441,19 +451,20 @@
                     status.innerHTML = "✅ Ответы отправлены! Результат: " + score + " из 16";
                     btn.innerText = "✅ Отправлено!";
                     btn.style.background = "#059669";
-                    btn.style.pointerEvents = 'none';
+                    btn.disabled = true;
                 } else {
+                    // Если форма вернула ошибку (например 400 или 500)
                     throw new Error("HTTP " + response.status);
                 }
             })
             .catch(function(err) {
                 clearTimeout(timeoutId);
                 isSending = false;
+                console.error("Fetch error:", err);
                 // Пробуем XHR как fallback
                 sendViaXHR(payload, score);
             });
         } else {
-            // Нет fetch — сразу XHR
             clearTimeout(timeoutId);
             sendViaXHR(payload, score);
         }
@@ -463,12 +474,12 @@
         var status = document.getElementById('status');
         var btn = document.getElementById('btn');
 
-        status.innerHTML = '<span class="spinner"></span> Повторная попытка...';
+        status.innerHTML = '<span class="spinner"></span> Повторная попытка (XHR)...';
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", FORM_URL, true);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Accept": "application/json");
         xhr.timeout = 10000;
 
         xhr.onload = function() {
@@ -478,14 +489,22 @@
                 status.innerHTML = "✅ Ответы отправлены! Результат: " + score + " из 16";
                 btn.innerText = "✅ Отправлено!";
                 btn.style.background = "#059669";
-                btn.style.pointerEvents = 'none';
+                btn.disabled = true;
             } else {
                 onFinalFail(payload);
             }
         };
 
-        xhr.onerror = function() { isSending = false; onFinalFail(payload); };
-        xhr.ontimeout = function() { isSending = false; onFinalFail(payload); };
+        xhr.onerror = function() { 
+            isSending = false; 
+            console.error("XHR Network Error");
+            onFinalFail(payload); 
+        };
+        
+        xhr.ontimeout = function() { 
+            isSending = false; 
+            onFinalFail(payload); 
+        };
 
         try {
             xhr.send(JSON.stringify(payload));
@@ -499,10 +518,9 @@
         var status = document.getElementById('status');
         var btn = document.getElementById('btn');
         status.className = "status-error";
-        status.innerHTML = "❌ Не удалось отправить. Скопируйте результат ниже и отправьте учителю.";
+        status.innerHTML = "❌ Не удалось отправить через интернет. Скопируйте результат ниже и отправьте учителю.";
         btn.innerText = "Попробовать снова";
-        btn.style.pointerEvents = 'auto';
-        btn.style.opacity = '1';
+        btn.disabled = false;
         showBackup(payload);
     }
 
@@ -513,7 +531,10 @@
         var name = getVal('studentName');
         if (!name) {
             alert("Пожалуйста, введите вашу Фамилию и Имя!");
-            document.getElementById('studentName').focus();
+            var nameInput = document.getElementById('studentName');
+            nameInput.focus();
+            // На мобильных скроллим к полю ввода
+            nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 
@@ -522,8 +543,7 @@
         var btn = document.getElementById('btn');
         var status = document.getElementById('status');
 
-        btn.style.pointerEvents = 'none';
-        btn.style.opacity = '0.7';
+        btn.disabled = true;
         btn.innerText = "Отправка...";
 
         status.className = "status-loading";
@@ -536,6 +556,8 @@
                 if (document.activeElement && document.activeElement.blur) {
                     document.activeElement.blur();
                 }
+                // Скроллим вверх, чтобы кнопка была видна
+                window.scrollTo(0, 0);
             } catch(e) {}
         }, 100);
 
@@ -551,16 +573,23 @@
     var btn = document.getElementById('btn');
     var lastTap = 0;
 
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        // Защита от двойного тапа
+    // Используем 'touchend' для более быстрого отклика на мобильных + 'click' для ПК
+    function handleInteraction(e) {
+        e.preventDefault(); // Предотвращаем двойное срабатывание
+        
         var now = Date.now();
-        if (now - lastTap < 800) return;
+        if (now - lastTap < 800) return; // Защита от двойного тапа
         lastTap = now;
+        
         handleSubmit();
-    }, false);
+    }
 
-    // Для доступности
+    if ('ontouchstart' in window) {
+        btn.addEventListener('touchend', handleInteraction, { passive: false });
+    }
+    btn.addEventListener('click', handleInteraction, false);
+
+    // Для доступности (клавиатура)
     btn.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.keyCode === 13) {
             e.preventDefault();
