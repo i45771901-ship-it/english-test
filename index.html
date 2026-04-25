@@ -193,7 +193,7 @@
 </head>
 <body>
     <div class="container">
-        <form id="testForm" action="https://formsubmit.co/i45771901@gmail.com" method="POST" novalidate>
+        <form id="testForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
             <h1>English Progress Check</h1>
             <div class="subtitle">Module 6: Final Test</div>
 
@@ -229,14 +229,15 @@
 
             <button type="submit" id="submitBtn" class="btn-submit">SEND ANSWERS</button>
             <div id="status"></div>
-            <input type="hidden" id="subjectField" name="_subject" value="">
-            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_ACCESS_KEY">
+            <input type="hidden" id="subjectField" name="subject" value="">
             <input type="hidden" id="studentField" name="Student" value="">
             <input type="hidden" id="scoreField" name="Score" value="">
             <input type="hidden" id="timeField" name="Time" value="">
             <input type="hidden" id="detailsField" name="Details" value="">
-            <input type="hidden" id="urlField" name="_url" value="">
-            <input type="hidden" id="nextField" name="_next" value="">
+            <input type="hidden" id="pageField" name="Page" value="">
+            <input type="hidden" id="redirectField" name="redirect" value="">
+            <input type="checkbox" name="botcheck" style="display: none;">
         </form>
     </div>
 
@@ -269,8 +270,8 @@
             const scoreField = document.getElementById("scoreField");
             const timeField = document.getElementById("timeField");
             const detailsField = document.getElementById("detailsField");
-            const urlField = document.getElementById("urlField");
-            const nextField = document.getElementById("nextField");
+            const pageField = document.getElementById("pageField");
+            const redirectField = document.getElementById("redirectField");
 
             function getValue(id) {
                 var el = document.getElementById(id);
@@ -346,20 +347,21 @@
                 scoreField.value = results.score;
                 timeField.value = timestamp;
                 detailsField.value = results.details;
+
                 if (window.location.protocol === "http:" || window.location.protocol === "https:") {
-                    urlField.disabled = false;
-                    urlField.value = window.location.href;
+                    pageField.disabled = false;
+                    pageField.value = window.location.href;
                 } else {
-                    urlField.disabled = true;
-                    urlField.value = "";
+                    pageField.disabled = true;
+                    pageField.value = "";
                 }
 
                 if (returnUrl) {
-                    nextField.disabled = false;
-                    nextField.value = returnUrl;
+                    redirectField.disabled = false;
+                    redirectField.value = returnUrl;
                 } else {
-                    nextField.disabled = true;
-                    nextField.value = "";
+                    redirectField.disabled = true;
+                    redirectField.value = "";
                 }
 
                 return true;
