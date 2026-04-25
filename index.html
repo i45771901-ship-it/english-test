@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Progress Check - Module 6</title>
     <style>
-        * { 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; 
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             background: #f3f4f6;
             color: #1f2937;
             margin: 0;
@@ -23,10 +23,10 @@
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
+            background: #ffffff;
             padding: 30px 25px;
             border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
@@ -102,7 +102,7 @@
 
         .btn-submit {
             background: #16a34a;
-            color: white;
+            color: #ffffff;
             border: none;
             width: 100%;
             padding: 18px;
@@ -111,7 +111,7 @@
             border-radius: 14px;
             cursor: pointer;
             margin-top: 30px;
-            box-shadow: 0 4px 6px rgba(22,163,74,0.25);
+            box-shadow: 0 4px 6px rgba(22, 163, 74, 0.25);
             transition: transform 0.1s, background 0.2s;
         }
 
@@ -157,7 +157,7 @@
             display: inline-block;
             width: 18px;
             height: 18px;
-            border: 3px solid rgba(30,64,175,0.3);
+            border: 3px solid rgba(30, 64, 175, 0.3);
             border-top-color: #1e40af;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
@@ -165,71 +165,24 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .backup-section {
-            display: none;
-            margin-top: 25px;
-            padding: 20px;
-            background: #fffbeb;
-            border: 2px dashed #f59e0b;
-            border-radius: 12px;
-        }
-
-        .backup-section h3 {
-            margin: 0 0 10px 0;
-            color: #92400e;
-            font-size: 16px;
-        }
-
-        .backup-section p {
-            margin: 0 0 15px 0;
-            font-size: 14px;
-            color: #6b7280;
-        }
-
-        .backup-textarea {
-            width: 100%;
-            height: 150px;
-            padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 12px;
-            font-family: monospace;
-            margin-bottom: 15px;
-            resize: vertical;
-        }
-
-        .copy-btn {
-            background: #f59e0b;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-weight: 600;
-            width: 100%;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .copy-btn:active {
-            background: #d97706;
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 480px) {
             body {
                 padding: 15px 10px;
             }
-            
+
             .container {
                 padding: 20px 15px;
             }
-            
+
             h1 {
                 font-size: 20px;
             }
-            
+
             .question input {
                 width: 120px;
                 font-size: 14px;
@@ -240,55 +193,55 @@
 </head>
 <body>
     <div class="container">
-        <h1>English Progress Check</h1>
-        <div class="subtitle">Module 6: Final Test</div>
+        <form id="testForm" action="https://formsubmit.co/i45771901@gmail.com" method="POST" novalidate>
+            <h1>English Progress Check</h1>
+            <div class="subtitle">Module 6: Final Test</div>
 
-        <div class="student-info">
-            <label for="studentName">Student's Full Name *</label>
-            <input type="text" id="studentName" placeholder="e.g. Ivanov Ivan">
-        </div>
+            <div class="student-info">
+                <label for="studentName">Student's Full Name *</label>
+                <input type="text" id="studentName" placeholder="e.g. Ivanov Ivan">
+            </div>
 
-        <div class="section-title">1. Word Formation</div>
-        <div class="question">1. I don't understand the <input type="text" id="q1" placeholder="..."> of the problem. (SERIOUS)</div>
-        <div class="question">2. Tom is staying in a new luxury <input type="text" id="q2" placeholder="...">. (DEVELOP)</div>
-        <div class="question">3. Ian thanked hosts for their <input type="text" id="q3" placeholder="...">. (KIND)</div>
-        <div class="question">4. We play games for <input type="text" id="q4" placeholder="...">. (AMUSE)</div>
-        <div class="question">5. I feel a bit of <input type="text" id="q5" placeholder="...">. (SAD)</div>
-        <div class="question">6. Travelling alone is plain <input type="text" id="q6" placeholder="...">. (MAD)</div>
-        <div class="question">7. Proud of your <input type="text" id="q7" placeholder="...">. (ACHIEVE)</div>
+            <div class="section-title">1. Word Formation</div>
+            <div class="question">1. I don't understand the <input type="text" id="q1" placeholder="..."> of the problem. (SERIOUS)</div>
+            <div class="question">2. Tom is staying in a new luxury <input type="text" id="q2" placeholder="...">. (DEVELOP)</div>
+            <div class="question">3. Ian thanked hosts for their <input type="text" id="q3" placeholder="...">. (KIND)</div>
+            <div class="question">4. We play games for <input type="text" id="q4" placeholder="...">. (AMUSE)</div>
+            <div class="question">5. I feel a bit of <input type="text" id="q5" placeholder="...">. (SAD)</div>
+            <div class="question">6. Travelling alone is plain <input type="text" id="q6" placeholder="...">. (MAD)</div>
+            <div class="question">7. Proud of your <input type="text" id="q7" placeholder="...">. (ACHIEVE)</div>
 
-        <div class="section-title">2. Phrasal Verbs</div>
-        <div class="question">1. Setting <input type="text" id="q8" placeholder="..."> money.</div>
-        <div class="question">2. Winter set <input type="text" id="q9" placeholder="...">.</div>
-        <div class="question">3. Delay set us <input type="text" id="q10" placeholder="...">.</div>
-        <div class="question">4. Tickets <input type="text" id="q11" placeholder="..."> airport.</div>
-        <div class="question">5. Traffic <input type="text" id="q12" placeholder="..."> motorway.</div>
-        <div class="question">6. Cars left <input type="text" id="q13" placeholder="..."> hire.</div>
+            <div class="section-title">2. Phrasal Verbs</div>
+            <div class="question">1. Setting <input type="text" id="q8" placeholder="..."> money.</div>
+            <div class="question">2. Winter set <input type="text" id="q9" placeholder="...">.</div>
+            <div class="question">3. Delay set us <input type="text" id="q10" placeholder="...">.</div>
+            <div class="question">4. Tickets <input type="text" id="q11" placeholder="..."> airport.</div>
+            <div class="question">5. Traffic <input type="text" id="q12" placeholder="..."> motorway.</div>
+            <div class="question">6. Cars left <input type="text" id="q13" placeholder="..."> hire.</div>
 
-        <div class="section-title">3. Vocabulary & Speech</div>
-        <div class="question">1. We [reached] Rome. Answer: <input type="text" id="q14" placeholder="..."></div>
-        <div class="question">2. [fetch] a towel. Answer: <input type="text" id="q15" placeholder="..."></div>
-        <div class="question">3. Columbus' [voyage]. Answer: <input type="text" id="q16" placeholder="..."></div>
-        <div class="question">4. He asked me <input type="text" id="q17" class="long-input" placeholder="if..."></div>
-        <div class="question">5. She told me <input type="text" id="q18" class="long-input" placeholder="that..."></div>
-        <div class="question">6. Teacher told us <input type="text" id="q19" class="long-input" placeholder="not to..."></div>
+            <div class="section-title">3. Vocabulary & Speech</div>
+            <div class="question">1. We [reached] Rome. Answer: <input type="text" id="q14" placeholder="..."></div>
+            <div class="question">2. [fetch] a towel. Answer: <input type="text" id="q15" placeholder="..."></div>
+            <div class="question">3. Columbus' [voyage]. Answer: <input type="text" id="q16" placeholder="..."></div>
+            <div class="question">4. He asked me <input type="text" id="q17" class="long-input" placeholder="if..."></div>
+            <div class="question">5. She told me <input type="text" id="q18" class="long-input" placeholder="that..."></div>
+            <div class="question">6. Teacher told us <input type="text" id="q19" class="long-input" placeholder="not to..."></div>
 
-        <button type="button" id="submitBtn" class="btn-submit">SEND ANSWERS</button>
-        <div id="status"></div>
-
-        <div class="backup-section" id="backupSection">
-            <h3>⚠️ Connection Issue?</h3>
-            <p>Copy the text below and send it to the teacher manually:</p>
-            <textarea class="backup-textarea" id="backupText" readonly></textarea>
-            <button class="copy-btn" id="copyBtn">📋 Copy to Clipboard</button>
-        </div>
+            <button type="submit" id="submitBtn" class="btn-submit">SEND ANSWERS</button>
+            <div id="status"></div>
+            <input type="hidden" id="subjectField" name="_subject" value="">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" id="studentField" name="Student" value="">
+            <input type="hidden" id="scoreField" name="Score" value="">
+            <input type="hidden" id="timeField" name="Time" value="">
+            <input type="hidden" id="detailsField" name="Details" value="">
+            <input type="hidden" id="urlField" name="_url" value="">
+            <input type="hidden" id="nextField" name="_next" value="">
+        </form>
     </div>
 
     <script>
         (function() {
-            const EMAIL = "i45771901@gmail.com";
-            const FORM_URL = "https://formsubmit.co/ajax/" + EMAIL;
-            
             const ANSWERS = {
                 q1: "seriousness",
                 q2: "development",
@@ -308,11 +261,16 @@
                 q16: "voyage"
             };
 
+            const form = document.getElementById("testForm");
             const btn = document.getElementById("submitBtn");
             const statusDiv = document.getElementById("status");
-            const backupSection = document.getElementById("backupSection");
-            const backupText = document.getElementById("backupText");
-            const copyBtn = document.getElementById("copyBtn");
+            const subjectField = document.getElementById("subjectField");
+            const studentField = document.getElementById("studentField");
+            const scoreField = document.getElementById("scoreField");
+            const timeField = document.getElementById("timeField");
+            const detailsField = document.getElementById("detailsField");
+            const urlField = document.getElementById("urlField");
+            const nextField = document.getElementById("nextField");
 
             function getValue(id) {
                 var el = document.getElementById(id);
@@ -323,27 +281,26 @@
                 var score = 0;
                 var total = 16;
                 var details = [];
-                
+
                 for (var key in ANSWERS) {
                     if (ANSWERS.hasOwnProperty(key)) {
                         var userAnswer = getValue(key).toLowerCase();
                         var correctAnswer = ANSWERS[key].toLowerCase();
                         var isCorrect = userAnswer === correctAnswer;
-                        
+
                         if (isCorrect) {
                             score++;
                         }
-                        
+
                         var qNum = key.replace("q", "");
                         details.push(qNum + ":" + (userAnswer || "-") + "[" + (isCorrect ? "OK" : correctAnswer) + "]");
                     }
                 }
-                
-                // Add manual questions
+
                 details.push("17:" + getValue("q17"));
                 details.push("18:" + getValue("q18"));
                 details.push("19:" + getValue("q19"));
-                
+
                 return {
                     score: score + "/" + total,
                     details: details.join(" | ")
@@ -356,135 +313,71 @@
                 statusDiv.innerHTML = message;
             }
 
-            async function sendAnswers() {
+            function buildReturnUrl() {
+                if (window.location.protocol !== "http:" && window.location.protocol !== "https:") {
+                    return "";
+                }
+
+                var currentUrl = new URL(window.location.href);
+                currentUrl.searchParams.set("sent", "1");
+                return currentUrl.toString();
+            }
+
+            function prepareSubmission() {
                 var name = getValue("studentName");
-                
+
                 if (!name) {
                     alert("Please enter your name first!");
                     document.getElementById("studentName").focus();
-                    return;
+                    return false;
                 }
 
                 btn.disabled = true;
-                btn.innerHTML = "<span class=\"spinner\"></span> Sending...";
-                showStatus("<span class=\"spinner\"></span> Connecting to server...", "loading");
+                btn.innerHTML = "<span class=\"spinner\"></span> Opening secure send...";
+                showStatus("<span class=\"spinner\"></span> Opening secure send...", "loading");
 
                 var results = calculateScore();
                 var now = new Date();
                 var timestamp = now.toLocaleString();
+                var returnUrl = buildReturnUrl();
 
-                var formData = {
-                    "_subject": "New Test: " + name,
-                    "_template": "table",
-                    "Student": name,
-                    "Score": results.score,
-                    "Time": timestamp,
-                    "Details": results.details
-                };
-
-                try {
-                    // Create abort controller for timeout
-                    var controller = new AbortController();
-                    var timeoutId = setTimeout(function() {
-                        controller.abort();
-                    }, 20000); // 20 second timeout
-
-                    var response = await fetch(FORM_URL, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Accept": "application/json"
-                        },
-                        body: JSON.stringify(formData),
-                        signal: controller.signal
-                    });
-
-                    clearTimeout(timeoutId);
-
-                    if (!response.ok) {
-                        throw new Error("Server error: " + response.status);
-                    }
-
-                    // Success
-                    showStatus("✅ Success! Score: " + results.score + ". Email sent to teacher.", "success");
-                    btn.innerHTML = "✅ Sent";
-                    btn.style.background = "#16a34a";
-                    
-                    // Disable form
-                    var inputs = document.querySelectorAll("input[type='text']");
-                    for (var i = 0; i < inputs.length; i++) {
-                        inputs[i].disabled = true;
-                    }
-
-                } catch (error) {
-                    console.error("Error:", error);
-                    
-                    // Show error and backup option
-                    showStatus("⚠️ Connection failed. Use backup option below.", "error");
-                    btn.disabled = false;
-                    btn.innerHTML = "Try Again";
-                    
-                    // Prepare backup text
-                    var backupContent = "STUDENT: " + name + "\n";
-                    backupContent += "SCORE: " + results.score + "\n";
-                    backupContent += "TIME: " + timestamp + "\n";
-                    backupContent += "------------------------\n";
-                    backupContent += results.details.replace(/\|/g, "\n");
-                    
-                    backupText.value = backupContent;
-                    backupSection.style.display = "block";
-                    
-                    // Scroll to backup
-                    setTimeout(function() {
-                        backupSection.scrollIntoView({ behavior: "smooth", block: "center" });
-                    }, 100);
+                subjectField.value = "New Test: " + name;
+                studentField.value = name;
+                scoreField.value = results.score;
+                timeField.value = timestamp;
+                detailsField.value = results.details;
+                if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+                    urlField.disabled = false;
+                    urlField.value = window.location.href;
+                } else {
+                    urlField.disabled = true;
+                    urlField.value = "";
                 }
+
+                if (returnUrl) {
+                    nextField.disabled = false;
+                    nextField.value = returnUrl;
+                } else {
+                    nextField.disabled = true;
+                    nextField.value = "";
+                }
+
+                return true;
             }
 
-            async function copyToClipboard() {
-                var text = backupText.value;
-                
-                // Try modern clipboard API first
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    try {
-                        await navigator.clipboard.writeText(text);
-                        copyBtn.innerHTML = "✅ Copied!";
-                        setTimeout(function() {
-                            copyBtn.innerHTML = "📋 Copy to Clipboard";
-                        }, 2000);
-                        return;
-                    } catch (err) {
-                        console.log("Clipboard API failed");
-                    }
-                }
-                
-                // Fallback for older browsers
-                backupText.select();
-                backupText.setSelectionRange(0, 99999); // For mobile
-                
-                try {
-                    document.execCommand("copy");
-                    copyBtn.innerHTML = "✅ Copied!";
-                    setTimeout(function() {
-                        copyBtn.innerHTML = "📋 Copy to Clipboard";
-                    }, 2000);
-                } catch (err) {
-                    alert("Please select and copy the text manually");
-                }
-            }
-
-            // Event listeners
-            btn.addEventListener("click", sendAnswers);
-            copyBtn.addEventListener("click", copyToClipboard);
-
-            // Allow Enter key to submit from last field
-            document.getElementById("q19").addEventListener("keypress", function(e) {
-                if (e.key === "Enter") {
+            form.addEventListener("submit", function(e) {
+                if (!prepareSubmission()) {
                     e.preventDefault();
-                    sendAnswers();
+                    return;
                 }
             });
 
+            if (new URLSearchParams(window.location.search).get("sent") === "1") {
+                showStatus("Success! Results were sent to the teacher.", "success");
+                btn.disabled = true;
+                btn.innerHTML = "Sent";
+                btn.style.background = "#16a34a";
+            }
         })();
     </script>
 </body>
