@@ -1,386 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Progress Check - Module 6</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Progress Check - Module 6</title>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background: #f3f4f6;
-            color: #1f2937;
-            margin: 0;
-            padding: 20px 15px;
-            line-height: 1.5;
-            min-height: 100vh;
-        }
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║  EMAIL SETUP (EmailJS — бесплатно, до 200 писем/мес) ║
+     ║  1. Зарегистрируйтесь на https://emailjs.com         ║
+     ║  2. Создайте Email Service (Gmail / Outlook / др.)   ║
+     ║  3. Создайте Email Template (переменные ниже)        ║
+     ║  4. Вставьте свои ключи в CONFIG ниже                ║
+     ╚══════════════════════════════════════════════════════╝ -->
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 30px 25px;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-        h1 {
-            color: #2563eb;
-            text-align: center;
-            margin: 0 0 10px 0;
-            font-size: 24px;
-        }
+<style>
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f3f4f6;
+  color: #1f2937;
+  margin: 0;
+  padding: 20px 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+h1 {
+  color: #2563eb;
+  text-align: center;
+  margin: 0 0 10px 0;
+  font-size: 24px;
+}
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+.student-info {
+  background: #eff6ff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input[type="text"]:focus {
+  border-color: #2563eb;
+}
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 30px 0 15px;
+  padding-left: 12px;
+  border-left: 5px solid #2563eb;
+  color: #1f2937;
+}
+.question {
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+.question input {
+  margin: 0 5px;
+  padding: 8px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 150px;
+}
+.long-input {
+  width: 100% !important;
+  margin-top: 8px !important;
+}
+.btn-submit {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  width: 100%;
+  padding: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-top: 30px;
+  box-shadow: 0 4px 6px rgba(22,163,74,0.25);
+  transition: transform 0.1s, background 0.2s;
+}
+.btn-submit:active { transform: scale(0.98); background: #15803d; }
+.btn-submit:disabled { background: #9ca3af; cursor: not-allowed; transform: none; }
+#status {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  display: none;
+}
+.status-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.status-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+.status-loading { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+.spinner {
+  display: inline-block;
+  width: 18px; height: 18px;
+  border: 3px solid rgba(30,64,175,0.3);
+  border-top-color: #1e40af;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
-        .subtitle {
-            text-align: center;
-            color: #6b7280;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
+/* Score badge */
+.score-badge {
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  font-size: 13px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
 
-        .student-info {
-            background: #eff6ff;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 16px;
-            font-family: inherit;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        input[type="text"]:focus {
-            border-color: #2563eb;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 30px 0 15px;
-            padding-left: 12px;
-            border-left: 5px solid #2563eb;
-            color: #1f2937;
-        }
-
-        .question {
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
-        .question input {
-            margin: 0 5px;
-            padding: 8px 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 16px;
-            width: 150px;
-        }
-
-        .long-input {
-            width: 100% !important;
-            margin-top: 8px !important;
-        }
-
-        .btn-submit {
-            background: #16a34a;
-            color: #ffffff;
-            border: none;
-            width: 100%;
-            padding: 18px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 14px;
-            cursor: pointer;
-            margin-top: 30px;
-            box-shadow: 0 4px 6px rgba(22, 163, 74, 0.25);
-            transition: transform 0.1s, background 0.2s;
-        }
-
-        .btn-submit:active {
-            transform: scale(0.98);
-            background: #15803d;
-        }
-
-        .btn-submit:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        #status {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 600;
-            display: none;
-        }
-
-        .status-success {
-            background: #dcfce7;
-            color: #166534;
-            border: 1px solid #bbf7d0;
-        }
-
-        .status-error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-
-        .status-loading {
-            background: #dbeafe;
-            color: #1e40af;
-            border: 1px solid #bfdbfe;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 3px solid rgba(30, 64, 175, 0.3);
-            border-top-color: #1e40af;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-right: 8px;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 15px 10px;
-            }
-
-            .container {
-                padding: 20px 15px;
-            }
-
-            h1 {
-                font-size: 20px;
-            }
-
-            .question input {
-                width: 120px;
-                font-size: 14px;
-                padding: 6px 10px;
-            }
-        }
-    </style>
+@media (max-width: 480px) {
+  body { padding: 15px 10px; }
+  .container { padding: 20px 15px; }
+  h1 { font-size: 20px; }
+  .question input { width: 120px; font-size: 14px; padding: 6px 10px; }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <form id="testForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
-            <h1>English Progress Check</h1>
-            <div class="subtitle">Module 6: Final Test</div>
+<div class="container">
 
-            <div class="student-info">
-                <label for="studentName">Student's Full Name *</label>
-                <input type="text" id="studentName" placeholder="e.g. Ivanov Ivan">
-            </div>
+  <h1>English Progress Check</h1>
+  <div class="subtitle">Module 6: Final Test</div>
 
-            <div class="section-title">1. Word Formation</div>
-            <div class="question">1. I don't understand the <input type="text" id="q1" placeholder="..."> of the problem. (SERIOUS)</div>
-            <div class="question">2. Tom is staying in a new luxury <input type="text" id="q2" placeholder="...">. (DEVELOP)</div>
-            <div class="question">3. Ian thanked hosts for their <input type="text" id="q3" placeholder="...">. (KIND)</div>
-            <div class="question">4. We play games for <input type="text" id="q4" placeholder="...">. (AMUSE)</div>
-            <div class="question">5. I feel a bit of <input type="text" id="q5" placeholder="...">. (SAD)</div>
-            <div class="question">6. Travelling alone is plain <input type="text" id="q6" placeholder="...">. (MAD)</div>
-            <div class="question">7. Proud of your <input type="text" id="q7" placeholder="...">. (ACHIEVE)</div>
+  <div class="student-info">
+    <label for="studentName">Student's Full Name *</label>
+    <input type="text" id="studentName" placeholder="e.g. Ivanov Ivan">
+  </div>
 
-            <div class="section-title">2. Phrasal Verbs</div>
-            <div class="question">1. Setting <input type="text" id="q8" placeholder="..."> money.</div>
-            <div class="question">2. Winter set <input type="text" id="q9" placeholder="...">.</div>
-            <div class="question">3. Delay set us <input type="text" id="q10" placeholder="...">.</div>
-            <div class="question">4. Tickets <input type="text" id="q11" placeholder="..."> airport.</div>
-            <div class="question">5. Traffic <input type="text" id="q12" placeholder="..."> motorway.</div>
-            <div class="question">6. Cars left <input type="text" id="q13" placeholder="..."> hire.</div>
+  <div class="section-title">1. Word Formation</div>
+  <div class="question">1. I don't understand the <input type="text" id="q1" placeholder="..."> of the problem. (SERIOUS)</div>
+  <div class="question">2. Tom is staying in a new luxury <input type="text" id="q2" placeholder="...">. (DEVELOP)</div>
+  <div class="question">3. Ian thanked hosts for their <input type="text" id="q3" placeholder="...">. (KIND)</div>
+  <div class="question">4. We play games for <input type="text" id="q4" placeholder="...">. (AMUSE)</div>
+  <div class="question">5. I feel a bit of <input type="text" id="q5" placeholder="...">. (SAD)</div>
+  <div class="question">6. Travelling alone is plain <input type="text" id="q6" placeholder="...">. (MAD)</div>
+  <div class="question">7. Proud of your <input type="text" id="q7" placeholder="...">. (ACHIEVE)</div>
 
-            <div class="section-title">3. Vocabulary & Speech</div>
-            <div class="question">1. We [reached] Rome. Answer: <input type="text" id="q14" placeholder="..."></div>
-            <div class="question">2. [fetch] a towel. Answer: <input type="text" id="q15" placeholder="..."></div>
-            <div class="question">3. Columbus' [voyage]. Answer: <input type="text" id="q16" placeholder="..."></div>
-            <div class="question">4. He asked me <input type="text" id="q17" class="long-input" placeholder="if..."></div>
-            <div class="question">5. She told me <input type="text" id="q18" class="long-input" placeholder="that..."></div>
-            <div class="question">6. Teacher told us <input type="text" id="q19" class="long-input" placeholder="not to..."></div>
+  <div class="section-title">2. Phrasal Verbs</div>
+  <div class="question">1. Setting <input type="text" id="q8" placeholder="..."> money.</div>
+  <div class="question">2. Winter set <input type="text" id="q9" placeholder="...">.</div>
+  <div class="question">3. Delay set us <input type="text" id="q10" placeholder="...">.</div>
+  <div class="question">4. Tickets <input type="text" id="q11" placeholder="..."> airport.</div>
+  <div class="question">5. Traffic <input type="text" id="q12" placeholder="..."> motorway.</div>
+  <div class="question">6. Cars left <input type="text" id="q13" placeholder="..."> hire.</div>
 
-            <button type="submit" id="submitBtn" class="btn-submit">SEND ANSWERS</button>
-            <div id="status"></div>
-            <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_ACCESS_KEY">
-            <input type="hidden" id="subjectField" name="subject" value="">
-            <input type="hidden" id="studentField" name="Student" value="">
-            <input type="hidden" id="scoreField" name="Score" value="">
-            <input type="hidden" id="timeField" name="Time" value="">
-            <input type="hidden" id="detailsField" name="Details" value="">
-            <input type="hidden" id="pageField" name="Page" value="">
-            <input type="hidden" id="redirectField" name="redirect" value="">
-            <input type="checkbox" name="botcheck" style="display: none;">
-        </form>
-    </div>
+  <div class="section-title">3. Vocabulary &amp; Speech</div>
+  <div class="question">1. We [reached] Rome. Answer: <input type="text" id="q14" placeholder="..."></div>
+  <div class="question">2. [fetch] a towel. Answer: <input type="text" id="q15" placeholder="..."></div>
+  <div class="question">3. Columbus' [voyage]. Answer: <input type="text" id="q16" placeholder="..."></div>
+  <div class="question">4. He asked me <input type="text" id="q17" class="long-input" placeholder="if..."></div>
+  <div class="question">5. She told me <input type="text" id="q18" class="long-input" placeholder="that..."></div>
+  <div class="question">6. Teacher told us <input type="text" id="q19" class="long-input" placeholder="not to..."></div>
 
-    <script>
-        (function() {
-            const ANSWERS = {
-                q1: "seriousness",
-                q2: "development",
-                q3: "kindness",
-                q4: "amusement",
-                q5: "sadness",
-                q6: "madness",
-                q7: "achievement",
-                q8: "aside",
-                q9: "in",
-                q10: "back",
-                q11: "at",
-                q12: "on",
-                q13: "for",
-                q14: "reached",
-                q15: "fetch",
-                q16: "voyage"
-            };
+  <button id="submitBtn" class="btn-submit" onclick="sendAnswers()">SEND ANSWERS</button>
+  <div id="status"></div>
 
-            const form = document.getElementById("testForm");
-            const btn = document.getElementById("submitBtn");
-            const statusDiv = document.getElementById("status");
-            const subjectField = document.getElementById("subjectField");
-            const studentField = document.getElementById("studentField");
-            const scoreField = document.getElementById("scoreField");
-            const timeField = document.getElementById("timeField");
-            const detailsField = document.getElementById("detailsField");
-            const pageField = document.getElementById("pageField");
-            const redirectField = document.getElementById("redirectField");
+</div>
 
-            function getValue(id) {
-                var el = document.getElementById(id);
-                return el ? el.value.trim() : "";
-            }
+<script>
+// ═══════════════════════════════════════════
+//  ⚙️  КОНФИГУРАЦИЯ — вставьте свои ключи
+// ═══════════════════════════════════════════
+var CONFIG = {
+  publicKey:  "Q0oeFiJB4BOTVP_pUuMIm",
+  serviceId:  "service_2qgpzgr",
+  templateId: "template_9oml6jv"
+};
 
-            function calculateScore() {
-                var score = 0;
-                var total = 16;
-                var details = [];
+// Переменные шаблона EmailJS (используйте эти имена в шаблоне):
+//  {{student_name}}   — имя студента
+//  {{score}}          — результат, например "13/16"
+//  {{time}}           — дата и время
+//  {{section1}}       — ответы секции 1
+//  {{section2}}       — ответы секции 2
+//  {{section3}}       — ответы секции 3 (открытые вопросы)
+// ═══════════════════════════════════════════
 
-                for (var key in ANSWERS) {
-                    if (ANSWERS.hasOwnProperty(key)) {
-                        var userAnswer = getValue(key).toLowerCase();
-                        var correctAnswer = ANSWERS[key].toLowerCase();
-                        var isCorrect = userAnswer === correctAnswer;
+emailjs.init({ publicKey: CONFIG.publicKey });
 
-                        if (isCorrect) {
-                            score++;
-                        }
+var ANSWERS = {
+  q1: "seriousness",
+  q2: "development",
+  q3: "kindness",
+  q4: "amusement",
+  q5: "sadness",
+  q6: "madness",
+  q7: "achievement",
+  q8: "aside",
+  q9: "in",
+  q10: "back",
+  q11: "at",
+  q12: "on",
+  q13: "for",
+  q14: "reached",
+  q15: "fetch",
+  q16: "voyage"
+};
 
-                        var qNum = key.replace("q", "");
-                        details.push(qNum + ":" + (userAnswer || "-") + "[" + (isCorrect ? "OK" : correctAnswer) + "]");
-                    }
-                }
+function val(id) {
+  var el = document.getElementById(id);
+  return el ? el.value.trim() : "";
+}
 
-                details.push("17:" + getValue("q17"));
-                details.push("18:" + getValue("q18"));
-                details.push("19:" + getValue("q19"));
+function showStatus(html, type) {
+  var d = document.getElementById("status");
+  d.style.display = "block";
+  d.className = "status-" + type;
+  d.innerHTML = html;
+}
 
-                return {
-                    score: score + "/" + total,
-                    details: details.join(" | ")
-                };
-            }
+function buildResults() {
+  var score = 0;
+  var total = Object.keys(ANSWERS).length;
+  var sec1Lines = [], sec2Lines = [], sec3Lines = [];
 
-            function showStatus(message, type) {
-                statusDiv.style.display = "block";
-                statusDiv.className = "status-" + type;
-                statusDiv.innerHTML = message;
-            }
+  // Section 1 — Word Formation (q1–q7)
+  for (var i = 1; i <= 7; i++) {
+    var key = "q" + i;
+    var user = val(key).toLowerCase();
+    var correct = ANSWERS[key].toLowerCase();
+    var ok = user === correct;
+    if (ok) score++;
+    var icon = ok ? "✅" : "❌";
+    sec1Lines.push(icon + " Q" + i + ": " + (user || "—") + (ok ? "" : "  (correct: " + correct + ")"));
+  }
 
-            function buildReturnUrl() {
-                if (window.location.protocol !== "http:" && window.location.protocol !== "https:") {
-                    return "";
-                }
+  // Section 2 — Phrasal Verbs (q8–q13)
+  for (var j = 8; j <= 13; j++) {
+    var key2 = "q" + j;
+    var user2 = val(key2).toLowerCase();
+    var correct2 = ANSWERS[key2].toLowerCase();
+    var ok2 = user2 === correct2;
+    if (ok2) score++;
+    var icon2 = ok2 ? "✅" : "❌";
+    sec2Lines.push(icon2 + " Q" + (j - 7) + ": " + (user2 || "—") + (ok2 ? "" : "  (correct: " + correct2 + ")"));
+  }
 
-                var currentUrl = new URL(window.location.href);
-                currentUrl.searchParams.set("sent", "1");
-                return currentUrl.toString();
-            }
+  // Section 3 — Vocabulary (q14–q16 checked, q17–q19 open)
+  for (var k = 14; k <= 16; k++) {
+    var key3 = "q" + k;
+    var user3 = val(key3).toLowerCase();
+    var correct3 = ANSWERS[key3].toLowerCase();
+    var ok3 = user3 === correct3;
+    if (ok3) score++;
+    var icon3 = ok3 ? "✅" : "❌";
+    sec3Lines.push(icon3 + " Q" + (k - 13) + ": " + (user3 || "—") + (ok3 ? "" : "  (correct: " + correct3 + ")"));
+  }
+  sec3Lines.push("📝 Q4 (open): " + (val("q17") || "—"));
+  sec3Lines.push("📝 Q5 (open): " + (val("q18") || "—"));
+  sec3Lines.push("📝 Q6 (open): " + (val("q19") || "—"));
 
-            function prepareSubmission() {
-                var name = getValue("studentName");
+  return {
+    score: score + "/" + total,
+    section1: sec1Lines.join("\n"),
+    section2: sec2Lines.join("\n"),
+    section3: sec3Lines.join("\n")
+  };
+}
 
-                if (!name) {
-                    alert("Please enter your name first!");
-                    document.getElementById("studentName").focus();
-                    return false;
-                }
+function sendAnswers() {
+  var name = val("studentName");
+  if (!name) {
+    alert("Please enter your name first!");
+    document.getElementById("studentName").focus();
+    return;
+  }
 
-                btn.disabled = true;
-                btn.innerHTML = "<span class=\"spinner\"></span> Opening secure send...";
-                showStatus("<span class=\"spinner\"></span> Opening secure send...", "loading");
+  var btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Sending...';
+  showStatus('<span class="spinner"></span> Sending results...', "loading");
 
-                var results = calculateScore();
-                var now = new Date();
-                var timestamp = now.toLocaleString();
-                var returnUrl = buildReturnUrl();
+  var results = buildResults();
+  var now = new Date();
+  var timestamp = now.toLocaleString("ru-RU", { dateStyle: "medium", timeStyle: "short" });
 
-                subjectField.value = "New Test: " + name;
-                studentField.value = name;
-                scoreField.value = results.score;
-                timeField.value = timestamp;
-                detailsField.value = results.details;
+  var templateParams = {
+    student_name: name,
+    score:        results.score,
+    time:         timestamp,
+    section1:     results.section1,
+    section2:     results.section2,
+    section3:     results.section3
+  };
 
-                if (window.location.protocol === "http:" || window.location.protocol === "https:") {
-                    pageField.disabled = false;
-                    pageField.value = window.location.href;
-                } else {
-                    pageField.disabled = true;
-                    pageField.value = "";
-                }
-
-                if (returnUrl) {
-                    redirectField.disabled = false;
-                    redirectField.value = returnUrl;
-                } else {
-                    redirectField.disabled = true;
-                    redirectField.value = "";
-                }
-
-                return true;
-            }
-
-            form.addEventListener("submit", function(e) {
-                if (!prepareSubmission()) {
-                    e.preventDefault();
-                    return;
-                }
-            });
-
-            if (new URLSearchParams(window.location.search).get("sent") === "1") {
-                showStatus("Success! Results were sent to the teacher.", "success");
-                btn.disabled = true;
-                btn.innerHTML = "Sent";
-                btn.style.background = "#16a34a";
-            }
-        })();
-    </script>
+  emailjs.send(CONFIG.serviceId, CONFIG.templateId, templateParams)
+    .then(function() {
+      showStatus("✅ Results sent to the teacher! Score: " + results.score, "success");
+      btn.innerHTML = "✅ Sent";
+      btn.style.background = "#16a34a";
+    })
+    .catch(function(err) {
+      console.error("EmailJS error:", err);
+      showStatus(
+        "❌ Send failed. Error: " + (err.text || JSON.stringify(err)) +
+        "<br><small>Check CONFIG keys in index.html</small>",
+        "error"
+      );
+      btn.disabled = false;
+      btn.innerHTML = "SEND ANSWERS";
+    });
+}
+</script>
 </body>
 </html>
