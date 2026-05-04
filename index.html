@@ -1,351 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Progress Check - Module 6</title>
+    <title>3D Игра: Собака и Игрушки</title>
     <style>
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background: #f3f4f6;
-            color: #1f2937;
-            margin: 0;
-            padding: 20px 15px;
-            line-height: 1.5;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 30px 25px;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            color: #2563eb;
-            text-align: center;
-            margin: 0 0 10px 0;
-            font-size: 24px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #6b7280;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .student-info {
-            background: #eff6ff;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
-
-        input[type="text"] {
+        body { margin: 0; overflow: hidden; font-family: sans-serif; }
+        #info {
+            position: absolute;
+            top: 10px;
             width: 100%;
-            padding: 14px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 16px;
-            font-family: inherit;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        input[type="text"]:focus {
-            border-color: #2563eb;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 30px 0 15px;
-            padding-left: 12px;
-            border-left: 5px solid #2563eb;
-            color: #1f2937;
-        }
-
-        .question {
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
-        .question input {
-            margin: 0 5px;
-            padding: 8px 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 16px;
-            width: 150px;
-        }
-
-        .long-input {
-            width: 100% !important;
-            margin-top: 8px !important;
-        }
-
-        .btn-submit {
-            background: #16a34a;
-            color: #ffffff;
-            border: none;
-            width: 100%;
-            padding: 18px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 14px;
-            cursor: pointer;
-            margin-top: 30px;
-            box-shadow: 0 4px 6px rgba(22, 163, 74, 0.25);
-            transition: transform 0.1s, background 0.2s;
-        }
-
-        .btn-submit:active {
-            transform: scale(0.98);
-            background: #15803d;
-        }
-
-        .btn-submit:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        #status {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
             text-align: center;
-            font-weight: 600;
-            display: none;
-        }
-
-        .status-success {
-            background: #dcfce7;
-            color: #166534;
-            border: 1px solid #bbf7d0;
-        }
-
-        .status-error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-
-        .status-loading {
-            background: #dbeafe;
-            color: #1e40af;
-            border: 1px solid #bfdbfe;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 3px solid rgba(30, 64, 175, 0.3);
-            border-top-color: #1e40af;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 15px 10px;
-            }
-
-            .container {
-                padding: 20px 15px;
-            }
-
-            h1 {
-                font-size: 20px;
-            }
-
-            .question input {
-                width: 120px;
-                font-size: 14px;
-                padding: 6px 10px;
-            }
+            color: white;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px black;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <form id="testForm" novalidate>
-            <h1>English Progress Check</h1>
-            <div class="subtitle">Module 6: Final Test</div>
-
-            <div class="student-info">
-                <label for="studentName">Student's Full Name *</label>
-                <input type="text" id="studentName" name="Student" placeholder="e.g. Ivanov Ivan" required>
-            </div>
-
-            <div class="section-title">1. Word Formation</div>
-            <div class="question">1. I don't understand the <input type="text" id="q1" placeholder="..."> of the problem. (SERIOUS)</div>
-            <div class="question">2. Tom is staying in a new luxury <input type="text" id="q2" placeholder="...">. (DEVELOP)</div>
-            <div class="question">3. Ian thanked hosts for their <input type="text" id="q3" placeholder="...">. (KIND)</div>
-            <div class="question">4. We play games for <input type="text" id="q4" placeholder="...">. (AMUSE)</div>
-            <div class="question">5. I feel a bit of <input type="text" id="q5" placeholder="...">. (SAD)</div>
-            <div class="question">6. Travelling alone is plain <input type="text" id="q6" placeholder="...">. (MAD)</div>
-            <div class="question">7. Proud of your <input type="text" id="q7" placeholder="...">. (ACHIEVE)</div>
-
-            <div class="section-title">2. Phrasal Verbs</div>
-            <div class="question">1. Setting <input type="text" id="q8" placeholder="..."> money.</div>
-            <div class="question">2. Winter set <input type="text" id="q9" placeholder="...">.</div>
-            <div class="question">3. Delay set us <input type="text" id="q10" placeholder="...">.</div>
-            <div class="question">4. Tickets <input type="text" id="q11" placeholder="..."> airport.</div>
-            <div class="question">5. Traffic <input type="text" id="q12" placeholder="..."> motorway.</div>
-            <div class="question">6. Cars left <input type="text" id="q13" placeholder="..."> hire.</div>
-
-            <div class="section-title">3. Vocabulary & Speech</div>
-            <div class="question">1. We [reached] Rome. Answer: <input type="text" id="q14" placeholder="..."></div>
-            <div class="question">2. [fetch] a towel. Answer: <input type="text" id="q15" placeholder="..."></div>
-            <div class="question">3. Columbus' [voyage]. Answer: <input type="text" id="q16" placeholder="..."></div>
-            <div class="question">4. He asked me <input type="text" id="q17" class="long-input" placeholder="if..."></div>
-            <div class="question">5. She told me <input type="text" id="q18" class="long-input" placeholder="that..."></div>
-            <div class="question">6. Teacher told us <input type="text" id="q19" class="long-input" placeholder="not to..."></div>
-
-            <button type="submit" id="submitBtn" class="btn-submit">SEND ANSWERS</button>
-            <div id="status"></div>
-            
-            <input type="hidden" name="access_key" value="9e215ea8-b751-4ee7-8dbe-95b1f1119676">
-            <input type="hidden" id="subjectField" name="subject" value="">
-            <input type="hidden" id="scoreField" name="Score" value="">
-            <input type="hidden" id="timeField" name="Time" value="">
-            <input type="hidden" id="detailsField" name="Details" value="">
-            <input type="checkbox" name="botcheck" style="display: none;">
-        </form>
-    </div>
-
-    <script>
-        (function() {
-            const ANSWERS = {
-                q1: "seriousness", q2: "development", q3: "kindness", q4: "amusement",
-                q5: "sadness", q6: "madness", q7: "achievement", q8: "aside",
-                q9: "in", q10: "back", q11: "at", q12: "on",
-                q13: "for", q14: "reached", q15: "fetch", q16: "voyage"
-            };
-
-            const form = document.getElementById("testForm");
-            const btn = document.getElementById("submitBtn");
-            const statusDiv = document.getElementById("status");
-            const subjectField = document.getElementById("subjectField");
-            const scoreField = document.getElementById("scoreField");
-            const timeField = document.getElementById("timeField");
-            const detailsField = document.getElementById("detailsField");
-
-            function getValue(id) {
-                var el = document.getElementById(id);
-                return el ? el.value.trim() : "";
+    <div id="info">Управление: Стрелки или WASD<br>Собирай игрушки!</div>
+    
+    <!-- Подключаем Three.js через CDN -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
             }
+        }
+    </script>
 
-            function calculateScore() {
-                var score = 0;
-                var total = 16;
-                var details = [];
+    <script type="module">
+        import * as THREE from 'three';
 
-                for (var key in ANSWERS) {
-                    if (ANSWERS.hasOwnProperty(key)) {
-                        var userAnswer = getValue(key).toLowerCase();
-                        var correctAnswer = ANSWERS[key].toLowerCase();
-                        var isCorrect = userAnswer === correctAnswer;
+        // 1. Сцена, Камера, Рендерер
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x87CEEB); // Небо
+        scene.fog = new THREE.Fog(0x87CEEB, 10, 50);
 
-                        if (isCorrect) score++;
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 10, 15);
+        camera.lookAt(0, 0, 0);
 
-                        var qNum = key.replace("q", "");
-                        details.push(qNum + ":" + (userAnswer || "-") + "[" + (isCorrect ? "OK" : correctAnswer) + "]");
-                    }
-                }
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.body.appendChild(renderer.domElement);
 
-                details.push("17:" + getValue("q17"));
-                details.push("18:" + getValue("q18"));
-                details.push("19:" + getValue("q19"));
+        // 2. Свет
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
 
-                return {
-                    score: score + "/" + total,
-                    details: details.join(" | ")
-                };
-            }
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(10, 20, 10);
+        dirLight.castShadow = true;
+        dirLight.shadow.camera.top = 20;
+        dirLight.shadow.camera.bottom = -20;
+        dirLight.shadow.camera.left = -20;
+        dirLight.shadow.camera.right = 20;
+        scene.add(dirLight);
 
-            function showStatus(message, type) {
-                statusDiv.style.display = "block";
-                statusDiv.className = "status-" + type;
-                statusDiv.innerHTML = message;
-            }
+        // 3. Пол (Трава)
+        const floorGeometry = new THREE.PlaneGeometry(100, 100);
+        const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x4caf50 });
+        const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+        floor.rotation.x = -Math.PI / 2;
+        floor.receiveShadow = true;
+        scene.add(floor);
 
-            form.addEventListener("submit", function(e) {
-                e.preventDefault(); // Останавливаем стандартную отправку
+        // 4. Создание Собаки (упрощенная модель из примитивов)
+        function createDog() {
+            const dogGroup = new THREE.Group();
 
-                var name = getValue("studentName");
-                if (!name) {
-                    alert("Please enter your name first!");
-                    document.getElementById("studentName").focus();
-                    return;
-                }
+            // Тело
+            const bodyGeo = new THREE.BoxGeometry(1.5, 1, 2.5);
+            const bodyMat = new THREE.MeshStandardMaterial({ color: 0x8B4513 }); // Коричневый
+            const body = new THREE.Mesh(bodyGeo, bodyMat);
+            body.position.y = 1;
+            body.castShadow = true;
+            dogGroup.add(body);
 
-                // Меняем кнопку на загрузку
-                btn.disabled = true;
-                btn.innerHTML = "<span class=\"spinner\"></span> Sending...";
-                showStatus("<span class=\"spinner\"></span> Please wait, saving your results...", "loading");
+            // Голова
+            const headGeo = new THREE.BoxGeometry(1, 1, 1);
+            const head = new THREE.Mesh(headGeo, bodyMat);
+            head.position.set(0, 1.8, 1.5);
+            head.castShadow = true;
+            dogGroup.add(head);
 
-                var results = calculateScore();
-                var now = new Date();
+            // Уши
+            const earGeo = new THREE.BoxGeometry(0.3, 0.5, 0.5);
+            const earL = new THREE.Mesh(earGeo, bodyMat);
+            earL.position.set(-0.4, 2.1, 1.5);
+            dogGroup.add(earL);
+            const earR = new THREE.Mesh(earGeo, bodyMat);
+            earR.position.set(0.4, 2.1, 1.5);
+            dogGroup.add(earR);
 
-                // Заполняем скрытые поля для письма
-                subjectField.value = "New Test: " + name;
-                scoreField.value = results.score;
-                timeField.value = now.toLocaleString();
-                detailsField.value = results.details;
+            // Хвост
+            const tailGeo = new THREE.BoxGeometry(0.3, 0.3, 1);
+            const tail = new THREE.Mesh(tailGeo, bodyMat);
+            tail.position.set(0, 1.5, -1.5);
+            tail.rotation.x = Math.PI / 4;
+            dogGroup.add(tail);
 
-                // Собираем данные
-                const formData = new FormData(form);
-
-                // Отправляем через API Web3Forms (без перезагрузки страницы)
-                fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(async (response) => {
-                    if (response.ok) {
-                        showStatus("Success! Results were sent to the teacher.", "success");
-                        btn.innerHTML = "Sent Successfully";
-                        form.reset(); // Очищаем форму
-                    } else {
-                        showStatus("Something went wrong. Please try again.", "error");
-                        btn.disabled = false;
-                        btn.innerHTML = "SEND ANSWERS";
-                    }
-                })
-                .catch(error => {
-                    showStatus("Network error. Please check your internet connection.", "error");
-                    btn.disabled = false;
-                    btn.innerHTML = "SEND ANSWERS";
-                });
+            // Лапы
+            const legGeo = new THREE.CylinderGeometry(0.2, 0.2, 1);
+            const positions = [
+                [-0.5, 0.5, 1], [0.5, 0.5, 1],
+                [-0.5, 0.5, -1], [0.5, 0.5, -1]
+            ];
+            positions.forEach(pos => {
+                const leg = new THREE.Mesh(legGeo, bodyMat);
+                leg.position.set(...pos);
+                leg.castShadow = true;
+                dogGroup.add(leg);
             });
-        })();
+
+            return dogGroup;
+        }
+
+        const dog = createDog();
+        scene.add(dog);
+
+        // 5. Игрушки
+        const toys = [];
+        const toyColors = [0xff0000, 0xffff00, 0x0000ff, 0xff00ff];
+        
+        function createToy(x, z) {
+            const geometry = new THREE.SphereGeometry(0.4, 16, 16);
+            const material = new THREE.MeshStandardMaterial({ 
+                color: toyColors[Math.floor(Math.random() * toyColors.length)],
+                roughness: 0.4
+            });
+            const toy = new THREE.Mesh(geometry, material);
+            toy.position.set(x, 0.4, z);
+            toy.castShadow = true;
+            
+            // Анимация вращения
+            toy.userData = { 
+                rotationSpeed: Math.random() * 0.05 + 0.02,
+                bounceOffset: Math.random() * Math.PI,
+                initialY: 0.4
+            };
+            
+            scene.add(toy);
+            toys.push(toy);
+        }
+
+        // Разбрасываем 10 игрушек
+        for (let i = 0; i < 10; i++) {
+            const x = (Math.random() - 0.5) * 40;
+            const z = (Math.random() - 0.5) * 40;
+            // Не спавним слишком близко к центру
+            if (Math.abs(x) > 2 || Math.abs(z) > 2) {
+                createToy(x, z);
+            }
+        }
+
+        // 6. Управление
+        const keys = { w: false, a: false, s: false, d: false, ArrowUp: false, ArrowLeft: false, ArrowDown: false, ArrowRight: false };
+        
+        window.addEventListener('keydown', (e) => keys[e.key] = true);
+        window.addEventListener('keyup', (e) => keys[e.key] = false);
+
+        const speed = 0.15;
+        const turnSpeed = 0.08;
+
+        // 7. Игровой цикл
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Движение собаки
+            let moving = false;
+            if (keys.w || keys.ArrowUp) {
+                dog.translateZ(speed);
+                moving = true;
+            }
+            if (keys.s || keys.ArrowDown) {
+                dog.translateZ(-speed);
+                moving = true;
+            }
+            if (keys.a || keys.ArrowLeft) {
+                dog.rotation.y += turnSpeed;
+            }
+            if (keys.d || keys.ArrowRight) {
+                dog.rotation.y -= turnSpeed;
+            }
+
+            // Камера следует за собакой
+            const relativeCameraOffset = new THREE.Vector3(0, 8, -12);
+            const cameraOffset = relativeCameraOffset.applyMatrix4(dog.matrixWorld);
+            
+            // Плавное слежение камеры
+            camera.position.lerp(cameraOffset, 0.1);
+            camera.lookAt(dog.position);
+
+            // Анимация игрушек и проверка столкновений
+            const time = Date.now() * 0.001;
+            for (let i = toys.length - 1; i >= 0; i--) {
+                const toy = toys[i];
+                
+                // Вращение и подпрыгивание
+                toy.rotation.y += toy.userData.rotationSpeed;
+                toy.position.y = toy.userData.initialY + Math.sin(time * 3 + toy.userData.bounceOffset) * 0.2;
+
+                // Проверка дистанции до собаки
+                const dist = dog.position.distanceTo(toy.position);
+                if (dist < 1.5) {
+                    // "Съели" игрушку
+                    scene.remove(toy);
+                    toys.splice(i, 1);
+                    
+                    // Создаем новую в случайном месте, чтобы игра не кончалась
+                    const newX = (Math.random() - 0.5) * 40;
+                    const newZ = (Math.random() - 0.5) * 40;
+                    createToy(newX, newZ);
+                }
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Обработка изменения размера окна
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
     </script>
 </body>
 </html>
